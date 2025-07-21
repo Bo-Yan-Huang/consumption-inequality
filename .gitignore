@@ -416,7 +416,7 @@ FodyWeavers.xsd
 *.run.xml
 *.dvi
 
-# JetBrains Rider
+# My gitignore
 *.sln.iml
 家庭收支調查70-112/
 inc/
