@@ -12,6 +12,10 @@
 
 \maketitle
 
+\begin{abstract}
+    This paper analyzes income and consumption inequality in Taiwan from 1981 to 2023 using household-level data from the Survey of Family Income and Expenditure. Income inequality has risen steadily but remains modest relative to other economies, with the burden falling most heavily on low-income households during recessions. Government redistribution through taxation and welfare programs has played a stabilizing role, though its effectiveness varies across crises. Consumption inequality has remained stable or declined, reflecting the role of savings, borrowing, and family support, as well as slower consumption growth among wealthier households. Together, these patterns highlight a divergence between income and consumption dynamics and signal potential structural vulnerabilities in Taiwan's economic landscape.
+\end{abstract}
+
 \section{Introduction}
 \label{sec:introduction}
 
@@ -237,21 +241,7 @@ In particular, the effect of private transfer smoothing out asset inequality was
     \label{fig:Gov}
 \end{figure}
 
-\subsection{Government Redistribution}
-
-We move on to government redistribution in Figure \ref{fig:Gov}. Redistribution plays a significant role in reducing income inequality. We can see that although both subsidy and taxation measures reduce inequality, welfare systems such as public health insurance and labor insurance have a more substantial redistribution effect. The benefits reduce the Gini coefficient for about 3 log points, and tax further reduces it by 0.5 log points, resulting in a much smoother trend.
-
-Compared to the increased variance and Gini coefficient of Pre-Government income, redistribution successfully stabilized the income inequality, making the Gini coefficient stable around 0.3. However, the government did not smooth out the drastic increase of inequalities during recessions like the Dot-com bubble in 2000 and the Global Financial Crisis in 2008. Surprisingly, COVID-19 after 2020 did not increase inequalities significantly; this can be due to the government's subsidy and expenditure, which successfully stabilized the disparity at the time.
-
-\subsection{From Income to Consumption Inequality}
-
-The rest of this section discusses consumptions and expenditures. Figure \ref{fig:Consumption} shows the exact four measurements of Figure \ref{fig:earnings_inequality} for disposable income and consumption; the result highlights the effect of consumption smoothing. Since households can borrow and save to maintain consumption when facing income shock, consumption inequality is smaller than income.
-
-Surprisingly, compared to the US, where consumption inequality increased, consumption discrepancies in Taiwan decreased steadily after 1995. One of the reasons could be the low consumption growth rate of wealthy families, as shown in figure \ref{fig:Consumption_cyclic}. The consumption expenditures of the top 5\% families only grow about 12 log points compared to 36 log points in the lowest 25 \%. 
-
-These consumption phenomena could negatively impact Taiwan's economy, suggested by Hong (\citeyear{TW_stable_dist}), since wealthy families do not increase their consumption and lower-income families face higher housing and health insurance burdens. Eventually, this led to a stagnation of Taiwan's economy.
-
-\begin{figure}[p]
+\begin{figure}[]
     \centering
     \begin{subfigure}[t]{0.475\textwidth}
         \centering
@@ -278,9 +268,8 @@ These consumption phenomena could negatively impact Taiwan's economy, suggested 
     \label{fig:Consumption_cyclic}
 \end{figure}
 
-\subsection{Food Consumption and Housing Services}
 
-\begin{figure}
+\begin{figure}[t]
     \centering
     \begin{subfigure}[t]{0.475\textwidth}
         \centering
@@ -301,6 +290,24 @@ These consumption phenomena could negatively impact Taiwan's economy, suggested 
     \caption{Food and Housing Consumption Inequality}
     \label{fig:Food_Housing}
 \end{figure}
+
+\newpage
+
+\subsection{Government Redistribution}
+
+We move on to government redistribution in Figure \ref{fig:Gov}. Redistribution plays a significant role in reducing income inequality. We can see that although both subsidy and taxation measures reduce inequality, welfare systems such as public health insurance and labor insurance have a more substantial redistribution effect. The benefits reduce the Gini coefficient for about 3 log points, and tax further reduces it by 0.5 log points, resulting in a much smoother trend.
+
+Compared to the increased variance and Gini coefficient of Pre-Government income, redistribution successfully stabilized the income inequality, making the Gini coefficient stable around 0.3. However, the government did not smooth out the drastic increase of inequalities during recessions like the Dot-com bubble in 2000 and the Global Financial Crisis in 2008. Surprisingly, COVID-19 after 2020 did not increase inequalities significantly; this can be due to the government's subsidy and expenditure, which successfully stabilized the disparity at the time.
+
+\subsection{From Income to Consumption Inequality}
+
+The rest of this section discusses consumptions and expenditures. Figure \ref{fig:Consumption} shows the exact four measurements of Figure \ref{fig:earnings_inequality} for disposable income and consumption; the result highlights the effect of consumption smoothing. Since households can borrow and save to maintain consumption when facing income shock, consumption inequality is smaller than income.
+
+Surprisingly, compared to the US, where consumption inequality increased, consumption discrepancies in Taiwan decreased steadily after 1995. One of the reasons could be the low consumption growth rate of wealthy families, as shown in figure \ref{fig:Consumption_cyclic}. The consumption expenditures of the top 5\% families only grow about 12 log points compared to 36 log points in the lowest 25 \%. 
+
+These consumption phenomena could negatively impact Taiwan's economy, suggested by Hong (\citeyear{TW_stable_dist}), since wealthy families do not increase their consumption and lower-income families face higher housing and health insurance burdens. Eventually, this led to a stagnation of Taiwan's economy.
+
+\subsection{Food Consumption and Housing Services}
 
 The final Figure \ref{fig:Food_Housing} highlights the inequalities in food and housing consumption in Taiwan. The Gini coefficients and variances presented in the figure indicate that the food expenditure discrepancies remain relatively small, and housing consumption inequality is steadily decreasing.
 
