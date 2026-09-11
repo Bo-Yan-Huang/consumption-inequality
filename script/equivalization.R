@@ -47,25 +47,30 @@ for(y in years){
 
     # income
     # inc_earnings itm190+itm240, inc_investment itm330, inc_transfer itm410, inc_total itm400
+    # Individual earnings are kept in two forms. The _raw columns are per earner,
+    # as the survey reports them. The plain columns are per adult equivalent, so
+    # they sit on the same scale as inc_earnings and can share an axis with it.
     inc_y <- inc_y %>% mutate(inc_earnings = (itm190 + itm240) / eqi_w,
-                              inc_earnings_main = itm191 + itm241,
+                              inc_earnings_main_raw = itm191 + itm241,
+                              inc_earnings_main = inc_earnings_main_raw / eqi_w,
                               inc_investment = itm330 / eqi_w,
                               inc_gtransfer = itm430 / eqi_w,
                               inc_ptransfer = itm410 / eqi_w - inc_gtransfer,
                               inc_total = itm400 / eqi_w)
     if(y == 84 | y == 83){
         inc_y <- inc_y %>% rowwise() %>% 
-            mutate(inc_earnings_max = max(itm191 + itm241, itm192 + itm242, itm193 + itm243, itm194 + itm244, itm195 + itm245, itm196 + itm246, itm197 + itm247)) %>% ungroup()
+            mutate(inc_earnings_max_raw = max(itm191 + itm241, itm192 + itm242, itm193 + itm243, itm194 + itm244, itm195 + itm245, itm196 + itm246, itm197 + itm247)) %>% ungroup()
     }else{
         inc_y <- inc_y %>% rowwise() %>% 
-            mutate(inc_earnings_max = max(itm191 + itm241, itm192 + itm242, itm193 + itm243, itm194 + itm244, itm195 + itm245, itm196 + itm246, itm197 + itm247, itm198 + itm248)) %>% ungroup()
+            mutate(inc_earnings_max_raw = max(itm191 + itm241, itm192 + itm242, itm193 + itm243, itm194 + itm244, itm195 + itm245, itm196 + itm246, itm197 + itm247, itm198 + itm248)) %>% ungroup()
     }
+    inc_y <- inc_y %>% mutate(inc_earnings_max = inc_earnings_max_raw / eqi_w)
     # spouse_earnings
     # spouse_earnings year >= 77
     if(y < 77){
-        inc_y$inc_earnings_spouse = NA
+        inc_y$inc_earnings_spouse_raw = NA
     }else if(y == 84 | y == 83){
-        inc_y <- inc_y %>% mutate(inc_earnings_spouse = case_when(spouse_id == 2 ~ itm192 + itm242,
+        inc_y <- inc_y %>% mutate(inc_earnings_spouse_raw = case_when(spouse_id == 2 ~ itm192 + itm242,
                                                             spouse_id == 3 ~ itm193 + itm243,
                                                             spouse_id == 4 ~ itm194 + itm244,
                                                             spouse_id == 5 ~ itm195 + itm245,
@@ -73,7 +78,7 @@ for(y in years){
                                                             spouse_id == 7 ~ itm197 + itm247,
                                                             TRUE ~ NA))
     }else{
-        inc_y <- inc_y %>% mutate(inc_earnings_spouse = case_when(spouse_id == 2 ~ itm192 + itm242,
+        inc_y <- inc_y %>% mutate(inc_earnings_spouse_raw = case_when(spouse_id == 2 ~ itm192 + itm242,
                                                             spouse_id == 3 ~ itm193 + itm243,
                                                             spouse_id == 4 ~ itm194 + itm244,
                                                             spouse_id == 5 ~ itm195 + itm245,
@@ -82,6 +87,7 @@ for(y in years){
                                                             spouse_id == 8 ~ itm198 + itm248,
                                                             TRUE ~ NA))
     }
+    inc_y <- inc_y %>% mutate(inc_earnings_spouse = inc_earnings_spouse_raw / eqi_w)
 
     # fill 0 for NA in itm590, itm610, itm620, itm710, itm730
     if(y < 98){
@@ -135,7 +141,7 @@ for(y in years){
     }
 
     inc_y$year <- 1911 + y
-    inc_y <- inc_y %>% select(year, id, weight, eqi_w, marriage, spouse_id, inc_earnings, inc_earnings_max, inc_earnings_main, inc_earnings_spouse, inc_investment, inc_gtransfer, inc_ptransfer, inc_total, exp_interest, exp_tax, exp_transfer, exp_consumption, exp_food, exp_housing)
+    inc_y <- inc_y %>% select(year, id, weight, eqi_w, marriage, spouse_id, inc_earnings, inc_earnings_max, inc_earnings_main, inc_earnings_spouse, inc_earnings_max_raw, inc_earnings_main_raw, inc_earnings_spouse_raw, inc_investment, inc_gtransfer, inc_ptransfer, inc_total, exp_interest, exp_tax, exp_transfer, exp_consumption, exp_food, exp_housing)
 
     cpi_y <- as.numeric(cpi[y - 70 + 1, 2])
     inc_y <- inc_y %>% mutate(across(starts_with('inc_'), ~ . / cpi_y * 100))
