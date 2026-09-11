@@ -55,10 +55,10 @@ for(y in years){
                               inc_total = itm400 / eqi_w)
     if(y == 84 | y == 83){
         inc_y <- inc_y %>% rowwise() %>% 
-            mutate(inc_earnings_max = max(itm191 + itm241, itm192 + itm242, itm193 + itm243, itm194 + itm244, itm195 + itm245, itm196 + itm246, itm197 + itm247))
+            mutate(inc_earnings_max = max(itm191 + itm241, itm192 + itm242, itm193 + itm243, itm194 + itm244, itm195 + itm245, itm196 + itm246, itm197 + itm247)) %>% ungroup()
     }else{
         inc_y <- inc_y %>% rowwise() %>% 
-            mutate(inc_earnings_max = max(itm191 + itm241, itm192 + itm242, itm193 + itm243, itm194 + itm244, itm195 + itm245, itm196 + itm246, itm197 + itm247, itm198 + itm248))
+            mutate(inc_earnings_max = max(itm191 + itm241, itm192 + itm242, itm193 + itm243, itm194 + itm244, itm195 + itm245, itm196 + itm246, itm197 + itm247, itm198 + itm248)) %>% ungroup()
     }
     # spouse_earnings
     # spouse_earnings year >= 77
