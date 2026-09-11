@@ -13,17 +13,8 @@ df_all <- df_all %>% filter(year != 2012)
 
 # !!NOTE: some NA are zero and some NA are missing val.
 # we turn all 0 to NA for earnings
-summary(df_all$inc_earnings)
-summary(df_all$inc_earnings_main)
-summary(df_all$inc_earnings_spouse)
-summary(df_all$inc_earnings_max)
 df_all <- df_all %>% mutate(inc_earnings = ifelse(inc_earnings <= 100, NA, inc_earnings))
 df_all <- df_all %>% mutate(across(starts_with('inc_earnings_'), ~ ifelse(. <= 100, NA, .)))
-df_all <- df_all %>% mutate(inc_earnings_max = ifelse(inc_earnings_max == -Inf, NA, inc_earnings_max))
-summary(df_all$inc_earnings)
-summary(df_all$inc_earnings_main)
-summary(df_all$inc_earnings_spouse)
-summary(df_all$inc_earnings_max)
 
 # Fig 5 From individual to HH inequality
 df_Fig_3_indHH <- df_all %>% group_by(year) %>% 

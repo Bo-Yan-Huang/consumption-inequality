@@ -53,15 +53,6 @@ df_Fig_2_wage <- df_all %>% group_by(year) %>%
               P75 = weighted.quantile(inc_earnings, weight, prob = 0.75),
               P90 = weighted.quantile(inc_earnings, weight, prob = 0.9),
               P95 = weighted.quantile(inc_earnings, weight, prob = 0.95))
-base_1981 <- df_Fig_2_wage %>% filter(year == 1981)
-df_Fig_2_wage <- df_Fig_2_wage %>%
-    mutate(n_P5 = P5 - base_1981$P5,
-           n_P10 = P10 - base_1981$P10,
-           n_P25 = P25 - base_1981$P25,
-           n_P50 = P50 - base_1981$P50,
-           n_P75 = P75 - base_1981$P75,
-           n_P90 = P90 - base_1981$P90,
-           n_P95 = P95 - base_1981$P95)
 df_Fig_2_wage <- df_Fig_2_wage %>%
     mutate(log_P5 = log(P5, exp(1)),
            log_P10 = log(P10, exp(1)),
