@@ -47,21 +47,12 @@ for(y in years){
 
     # income
     # inc_earnings itm190+itm240, inc_investment itm330, inc_transfer itm410, inc_total itm400
-    if(y == 84){
-        inc_y <- inc_y %>% mutate(inc_earnings = (itm190 + itm240) / eqi_w,
-                                  inc_earnings_main = itm191 + itm241,
-                                  inc_investment = itm330 / eqi_w,
-                                  inc_gtransfer = itm430 / eqi_w,
-                                  inc_ptransfer = itm410 / eqi_w - inc_gtransfer,
-                                  inc_total = itm400 / eqi_w)
-    }else{
-        inc_y <- inc_y %>% mutate(inc_earnings = (itm190 + itm240) / eqi_w,
-                                  inc_earnings_main = itm191 + itm241,
-                                  inc_investment = itm330 / eqi_w,
-                                  inc_gtransfer = itm430 / eqi_w,
-                                  inc_ptransfer = itm410 / eqi_w - inc_gtransfer,
-                                  inc_total = itm400 / eqi_w)
-    }
+    inc_y <- inc_y %>% mutate(inc_earnings = (itm190 + itm240) / eqi_w,
+                              inc_earnings_main = itm191 + itm241,
+                              inc_investment = itm330 / eqi_w,
+                              inc_gtransfer = itm430 / eqi_w,
+                              inc_ptransfer = itm410 / eqi_w - inc_gtransfer,
+                              inc_total = itm400 / eqi_w)
     if(y == 84 | y == 83){
         inc_y <- inc_y %>% rowwise() %>% 
             mutate(inc_earnings_max = max(itm191 + itm241, itm192 + itm242, itm193 + itm243, itm194 + itm244, itm195 + itm245, itm196 + itm246, itm197 + itm247))
