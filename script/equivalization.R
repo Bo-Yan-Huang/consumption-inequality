@@ -11,7 +11,7 @@ cpi <- read.csv("cpi_70_112.csv") %>% as_tibble()
 
 years <- c(70:112)
 
-HH_all <- tibble()
+HH_list <- list()
 
 for(y in years){
     inc_y <- read_dta(paste0("inc//inc", y, ".dta")) %>% as_tibble()
@@ -150,8 +150,10 @@ for(y in years){
     inc_y <- inc_y %>% mutate(across(starts_with('inc_'), ~ . / cpi_y * 100))
     inc_y <- inc_y %>% mutate(across(starts_with('exp_'), ~ . / cpi_y * 100))
 
-    HH_all <- rbind(HH_all, inc_y)
+    HH_list[[as.character(y)]] <- inc_y
     write.csv(inc_y, file = paste0("HH_inc_exp//HH_", y, ".csv"), row.names = F)
-    write.csv(HH_all, file = paste0("HH_inc_exp//HH_", "all", ".csv"), row.names = F)
     print(paste("year", y, "done!"))
 }
+
+HH_all <- bind_rows(HH_list)
+write.csv(HH_all, file = "HH_inc_exp//HH_all.csv", row.names = F)
