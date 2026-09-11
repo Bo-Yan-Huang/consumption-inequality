@@ -54,6 +54,47 @@ ggplot(df_Fig_3_indHH) +
     theme(plot.title = element_text(hjust = 0.5),
           legend.position = c(0.17, 0.75))
 ggsave("figures/Fig_3/Fig_3b_Gini_indHH.png", dpi = 600, width = 5, height = 3)
+
+# Robustness for the appendix: the same comparison with the main earner left on
+# the per-earner scale, which is how Figure 3a and 3b were drawn before the
+# equivalization was made consistent. Household stays per adult equivalent.
+df_Fig_3_indHH_raw <- df_all %>% group_by(year) %>%
+    summarise(Var_earnings_max = weighted.var(log(inc_earnings_max_raw, exp(1)), weight, na.rm = T),
+              Var_earnings_HH = weighted.var(log(inc_earnings, exp(1)), weight, na.rm = T),
+              Gini_earnings_max = Gini(inc_earnings_max_raw, weight, na.rm = T),
+              Gini_earnings_HH = Gini(inc_earnings, weight, na.rm = T))
+colors <- c("Main Earner" = "blue", "Household" = "red")
+ggplot(df_Fig_3_indHH_raw) +
+    geom_line(aes(x = year, y = Var_earnings_max, colour = "Main Earner"), linewidth = 1) +
+    geom_line(aes(x = year, y = Var_earnings_HH, colour = "Household"), linewidth = 1) +
+    scale_x_continuous(name = "Year") +
+    scale_y_continuous(name = "Variance of Log") +
+    labs(title = "Variance of Log Earnings \n (Main Earner Not Equivalized)") +
+    scale_color_manual(
+        guide = guide_legend(title = NULL),
+        values = colors,
+        breaks = c("Main Earner", "Household"),
+        labels = c("Main Earner, per earner", "Household, per adult equiv.")
+    ) +
+    theme(plot.title = element_text(hjust = 0.5),
+          legend.position = c(0.72, 0.18))
+ggsave("figures/Fig_3/Fig_3g_Var_indHH_raw.png", dpi = 600, width = 5, height = 3)
+ggplot(df_Fig_3_indHH_raw) +
+    geom_line(aes(x = year, y = Gini_earnings_max, colour = "Main Earner"), linewidth = 1) +
+    geom_line(aes(x = year, y = Gini_earnings_HH, colour = "Household"), linewidth = 1) +
+    scale_x_continuous(name = "Year") +
+    scale_y_continuous(name = "Gini Coefficient") +
+    labs(title = "Gini Coefficient of Earnings \n (Main Earner Not Equivalized)") +
+    scale_color_manual(
+        guide = guide_legend(title = NULL),
+        values = colors,
+        breaks = c("Main Earner", "Household"),
+        labels = c("Main Earner, per earner", "Household, per adult equiv.")
+    ) +
+    theme(plot.title = element_text(hjust = 0.5),
+          legend.position = c(0.72, 0.18))
+ggsave("figures/Fig_3/Fig_3h_Gini_indHH_raw.png", dpi = 600, width = 5, height = 3)
+
 # single/married
 colors <- c("0" = "blue", "1" = "red")
 df_Fig_3_single <- df_all %>% group_by(year, marriage) %>% 
