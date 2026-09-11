@@ -236,7 +236,7 @@ ggplot(df_Fig_5_gov) +
     geom_line(aes(x = year, y = Var_2, colour = "Pre-Tax Income"), linewidth = 1) +
     geom_line(aes(x = year, y = Var_3, colour = "Disposable Income"), linewidth = 1) +
     labs(title = "Var. of Log Income", x = "Year", y = "Variance of Log") +
-    ylim(0.21, 0.31) +
+    coord_cartesian(ylim = c(0.21, 0.31)) +
     scale_color_manual(
         guide = guide_legend(title = NULL),
         values = colors,
@@ -250,7 +250,7 @@ ggplot(df_Fig_5_gov) +
     geom_line(aes(x = year, y = Gini_2, colour = "Pre-Tax Income"), linewidth = 1) +
     geom_line(aes(x = year, y = Gini_3, colour = "Disposable Income"), linewidth = 1) +
     labs(title = "Gini of Income", x = "Year", y = "Gini Coefficient") +
-    ylim(0.26, 0.34) +
+    coord_cartesian(ylim = c(0.26, 0.34)) +
     scale_color_manual(
         guide = guide_legend(title = NULL),
         values = colors,
