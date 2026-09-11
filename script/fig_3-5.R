@@ -47,7 +47,7 @@ ggplot(df_Fig_3_indHH) +
     ) +
     theme(plot.title = element_text(hjust = 0.5),
           legend.position = c(0.17, 0.75))
-ggsave("Fig_3//Fig_3a_Var_indHH.png", dpi = 600, width = 5, height = 3)
+ggsave("figures/Fig_3/Fig_3a_Var_indHH.png", dpi = 600, width = 5, height = 3)
 ggplot(df_Fig_3_indHH) +
     geom_line(aes(x = year, y = Gini_earnings_max, colour = "Main Earner"), linewidth = 1) +
     geom_line(aes(x = year, y = Gini_earnings_HH, colour = "Household"), linewidth = 1) +
@@ -62,7 +62,7 @@ ggplot(df_Fig_3_indHH) +
     ) +
     theme(plot.title = element_text(hjust = 0.5),
           legend.position = c(0.17, 0.75))
-ggsave("Fig_3//Fig_3b_Gini_indHH.png", dpi = 600, width = 5, height = 3)
+ggsave("figures/Fig_3/Fig_3b_Gini_indHH.png", dpi = 600, width = 5, height = 3)
 # single/married
 colors <- c("0" = "blue", "1" = "red")
 df_Fig_3_single <- df_all %>% group_by(year, marriage) %>% 
@@ -81,7 +81,7 @@ ggplot(df_Fig_3_single, aes(x = year, y = Var_earnings, colour = factor(marriage
     ) +
     theme(plot.title = element_text(hjust = 0.5),
           legend.position = c(0.17, 0.75))
-ggsave("Fig_3//Fig_3c_Var_single.png", dpi = 600, width = 5, height = 3)
+ggsave("figures/Fig_3/Fig_3c_Var_single.png", dpi = 600, width = 5, height = 3)
 df_Fig_3_single <- df_all %>% filter(year >= 1988) %>% 
     group_by(year) %>%
     summarise(married_ratio = sum(marriage == 1, na.rm = T) / sum(!is.na(marriage)),
@@ -92,14 +92,14 @@ ggplot(df_Fig_3_single, aes(x = year)) +
     scale_y_continuous(name = "Ratio") +
     labs(title = "Fraction of Married Households \n Among All Households") +
     theme(plot.title = element_text(hjust = 0.5))
-ggsave("Fig_3//Fig_3d_married_ratio.png", dpi = 600, width = 5, height = 3)
+ggsave("figures/Fig_3/Fig_3d_married_ratio.png", dpi = 600, width = 5, height = 3)
 ggplot(df_Fig_3_single, aes(x = year)) +
     geom_line(aes(y = two_earner_ratio), colour = "blue", linewidth = 1) +
     scale_x_continuous(name = "Year",limits = c(1988, 2022)) +
     scale_y_continuous(name = "Ratio") +
     labs(title = "Fraction of Two-Earner Households \n Among Cohabiting Couples") +
     theme(plot.title = element_text(hjust = 0.5))
-ggsave("Fig_3//Fig_3e_two_earner_ratio.png", dpi = 600, width = 5, height = 3)
+ggsave("figures/Fig_3/Fig_3e_two_earner_ratio.png", dpi = 600, width = 5, height = 3)
 # f between-spouse correlation among Two-Earner Cohabiting Couples
 df_Fig_3_correlation <- df_all %>% filter(year >= 1988, inc_earnings_spouse > 0 & inc_earnings_main > 0) %>%
     group_by(year) %>%
@@ -110,7 +110,7 @@ ggplot(df_Fig_3_correlation, aes(x = year, y = correlation)) +
     scale_y_continuous(name = "Correlation") +
     labs(title = "Between-Spouse Corr. of Log Earnings \n Among Two-Earner Cohabiting Couples") +
     theme(plot.title = element_text(hjust = 0.5))
-ggsave("Fig_3//Fig_3f_correlation.png", dpi = 600, width = 5, height = 3)
+ggsave("figures/Fig_3/Fig_3f_correlation.png", dpi = 600, width = 5, height = 3)
 
 # Fig6 Private transfers and asset income
 colors <- c("HH Earnings" = "blue", "HH Earnings + Priv. Transf." = "red", "HH Earnings + Asset Income" = "green", "HH Earnings + Priv. Transf. + Asset Income" = "purple")
@@ -148,7 +148,7 @@ ggplot(df_Fig_4_inc) +
     ) +
     theme(plot.title = element_text(hjust = 0.5),
           legend.position = c(0.32, 0.8))
-ggsave("Fig_4//Fig_4a_Var_inc.png", dpi = 600, width = 4, height = 4)
+ggsave("figures/Fig_4/Fig_4a_Var_inc.png", dpi = 600, width = 4, height = 4)
 ggplot(df_Fig_4_inc) +
     geom_line(aes(x = year, y = Gini_1), colour = colors[1], linewidth = 1) +
     geom_line(aes(x = year, y = Gini_2), colour = colors[2], linewidth = 1) +
@@ -157,7 +157,7 @@ ggplot(df_Fig_4_inc) +
     labs(title = "Gini of Income", x = "Year", y = "Gini Coefficient") +
     theme(plot.title = element_text(hjust = 0.5),
           legend.position = c(0.17, 0.75))
-ggsave("Fig_4//Fig_4b_Gini_inc.png", dpi = 600, width = 4, height = 4)
+ggsave("figures/Fig_4/Fig_4b_Gini_inc.png", dpi = 600, width = 4, height = 4)
 # correlation between inc_earnings_investment and private transfers
 df_TEMP <- df_all %>% mutate(inc_ptransfer = ifelse(is.na(inc_ptransfer), 0, inc_ptransfer),
                               inc_investment = ifelse(is.na(inc_investment), 0, inc_investment))
@@ -174,7 +174,7 @@ ggplot(df_Fig_4_inc) +
     labs(title = "Var. of Log Income", x = "Year", y = "Variance of Log") +
     theme(plot.title = element_text(hjust = 0.5),
           legend.position = c(0.42, 0.85))
-ggsave("Fig_4//Fig_4c_Var_inc.png", dpi = 600, width = 4, height = 4)
+ggsave("figures/Fig_4/Fig_4c_Var_inc.png", dpi = 600, width = 4, height = 4)
 ggplot(df_Fig_4_inc) +
     geom_line(aes(x = year, y = Gini_1), colour = colors[1], linewidth = 1) +
     geom_line(aes(x = year, y = Gini_2), colour = colors[2], linewidth = 1) +
@@ -182,7 +182,7 @@ ggplot(df_Fig_4_inc) +
     labs(title = "Gini of Income", x = "Year", y = "Gini Coefficient") +
     theme(plot.title = element_text(hjust = 0.5),
           legend.position = c(0.17, 0.75))
-ggsave("Fig_4//Fig_4d_Gini_inc.png", dpi = 600, width = 4, height = 4)
+ggsave("figures/Fig_4/Fig_4d_Gini_inc.png", dpi = 600, width = 4, height = 4)
 
 
 # Fig5 Government benefits and tax
@@ -218,7 +218,7 @@ ggplot(df_Fig_5_gov) +
     ) +
     theme(plot.title = element_text(hjust = 0.5),
           legend.position = c(0.24, 0.87))
-ggsave("Fig_5//Fig_5a_Var_inc.png", dpi = 600, width = 4, height = 4)
+ggsave("figures/Fig_5/Fig_5a_Var_inc.png", dpi = 600, width = 4, height = 4)
 ggplot(df_Fig_5_gov) +
     geom_line(aes(x = year, y = Gini_1, colour = "Pre-Govt. Income"), linewidth = 1) +
     geom_line(aes(x = year, y = Gini_2, colour = "Pre-Tax Income"), linewidth = 1) +
@@ -231,7 +231,7 @@ ggplot(df_Fig_5_gov) +
     ) +
     theme(plot.title = element_text(hjust = 0.5),
           legend.position = c(0.24, 0.87))
-ggsave("Fig_5//Fig_5b_Gini_inc.png", dpi = 600, width = 4, height = 4)
+ggsave("figures/Fig_5/Fig_5b_Gini_inc.png", dpi = 600, width = 4, height = 4)
 ggplot(df_Fig_5_gov) +
     geom_line(aes(x = year, y = Var_2, colour = "Pre-Tax Income"), linewidth = 1) +
     geom_line(aes(x = year, y = Var_3, colour = "Disposable Income"), linewidth = 1) +
@@ -245,7 +245,7 @@ ggplot(df_Fig_5_gov) +
     ) +
     theme(plot.title = element_text(hjust = 0.5),
           legend.position = c(0.24, 0.87))
-ggsave("Fig_5//Fig_5c_Var_inc.png", dpi = 600, width = 4, height = 4)
+ggsave("figures/Fig_5/Fig_5c_Var_inc.png", dpi = 600, width = 4, height = 4)
 ggplot(df_Fig_5_gov) +
     geom_line(aes(x = year, y = Gini_2, colour = "Pre-Tax Income"), linewidth = 1) +
     geom_line(aes(x = year, y = Gini_3, colour = "Disposable Income"), linewidth = 1) +
@@ -259,4 +259,4 @@ ggplot(df_Fig_5_gov) +
     ) +
     theme(plot.title = element_text(hjust = 0.5),
           legend.position = c(0.24, 0.87))
-ggsave("Fig_5//Fig_5d_Gini_inc.png", dpi = 600, width = 4, height = 4)
+ggsave("figures/Fig_5/Fig_5d_Gini_inc.png", dpi = 600, width = 4, height = 4)

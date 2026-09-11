@@ -47,7 +47,7 @@ ggplot(df_Fig_6) +
     ) +
     theme(plot.title = element_text(hjust = 0.5),
           legend.position = c(0.24, 0.14))
-ggsave("Fig_6//Fig_6a.png", dpi = 600, width = 4, height = 4)
+ggsave("figures/Fig_6/Fig_6a.png", dpi = 600, width = 4, height = 4)
 ggplot(df_Fig_6) +
     geom_line(aes(x = year, y = Gini_disp_inc, color = "disp_inc"), linewidth = 1) +
     geom_line(aes(x = year, y = Gini_consump, color = "consump"), linewidth = 1) +
@@ -60,7 +60,7 @@ ggplot(df_Fig_6) +
     ) +
     theme(plot.title = element_text(hjust = 0.5),
           legend.position = c(0.24, 0.14))
-ggsave("Fig_6//Fig_6b.png", dpi = 600, width = 4, height = 4)
+ggsave("figures/Fig_6/Fig_6b.png", dpi = 600, width = 4, height = 4)
 ggplot(df_Fig_6) +
     geom_line(aes(x = year, y = P50_P10_disp_inc, color = "disp_inc"), linewidth = 1) +
     geom_line(aes(x = year, y = P50_P10_consump, color = "consump"), linewidth = 1) +
@@ -73,7 +73,7 @@ ggplot(df_Fig_6) +
     ) +
     theme(plot.title = element_text(hjust = 0.5),
           legend.position = c(0.24, 0.14))
-ggsave("Fig_6//Fig_6c.png", dpi = 600, width = 4, height = 4)
+ggsave("figures/Fig_6/Fig_6c.png", dpi = 600, width = 4, height = 4)
 ggplot(df_Fig_6) +
     geom_line(aes(x = year, y = P90_P50_disp_inc, color = "disp_inc"), linewidth = 1) +
     geom_line(aes(x = year, y = P90_P50_consump, color = "consump"), linewidth = 1) +
@@ -86,7 +86,7 @@ ggplot(df_Fig_6) +
     ) +
     theme(plot.title = element_text(hjust = 0.5),
           legend.position = c(0.24, 0.14))
-ggsave("Fig_6//Fig_6d.png", dpi = 600, width = 4, height = 4)
+ggsave("figures/Fig_6/Fig_6d.png", dpi = 600, width = 4, height = 4)
 
 # Fig7 Percentiles of the household consumption distribution 1981
 df_Fig_7 <- df_all %>% group_by(year) %>% 
@@ -143,7 +143,7 @@ ggplot(df_Fig_7) +
         labels = c("P5", "P10", "P25", "P50", "P75", "P90", "P95")
     ) +
     theme(plot.title = element_text(hjust = 0.5))
-ggsave("Fig_7//Fig_7_percentiles_1981.png", dpi = 600, width = 9, height = 6)
+ggsave("figures/Fig_7/Fig_7_percentiles_1981.png", dpi = 600, width = 9, height = 6)
 
 # Fig7 Percentiles of the household consumption distribution 1995
 df_Fig_7 <- df_Fig_7 %>%
@@ -174,7 +174,7 @@ ggplot(df_Fig_7) +
         labels = c("P5", "P10", "P25", "P50", "P75", "P90", "P95")
     ) +
     theme(plot.title = element_text(hjust = 0.5))
-ggsave("Fig_7//Fig_7_percentiles_1995.png", dpi = 600, width = 9, height = 6)
+ggsave("figures/Fig_7/Fig_7_percentiles_1995.png", dpi = 600, width = 9, height = 6)
 
 # Fig 3 for Percentiles of the household earnings distribution after 1995
 # plot
@@ -197,7 +197,7 @@ ggplot(df_Fig_7 %>% filter(year >= 1995)) +
         labels = c("P5", "P10", "P25", "P50", "P75", "P90", "P95")
     ) +
     theme(plot.title = element_text(hjust = 0.5))
-ggsave("Fig_7//Fig_7_percentiles_a1995.png", dpi = 600, width = 9, height = 6)
+ggsave("figures/Fig_7/Fig_7_percentiles_a1995.png", dpi = 600, width = 9, height = 6)
 
 # Fig8 food & housing consumption
 # top: food var, foog gini
@@ -212,19 +212,19 @@ ggplot(df_Fig_8, aes(x = year, y = Var_food)) +
     geom_line(colour = "blue", linewidth = 1) +
     labs(title = "Equiv. HH Food Consumption", x = "Year", y = "Variance of Log") +
     theme(plot.title = element_text(hjust = 0.5))
-ggsave("Fig_8//Fig_8a_Var_Food.png", dpi = 600, width = 4, height = 4)
+ggsave("figures/Fig_8/Fig_8a_Var_Food.png", dpi = 600, width = 4, height = 4)
 ggplot(df_Fig_8, aes(x = year, y = Gini_food)) +
     geom_line(colour = "blue", linewidth = 1) +
     labs(title = "Equiv. HH Food Consumption", x = "Year", y = "Gini Coefficient") +
     theme(plot.title = element_text(hjust = 0.5))
-ggsave("Fig_8//Fig_8b_Gini_Food.png", dpi = 600, width = 4, height = 4)
+ggsave("figures/Fig_8/Fig_8b_Gini_Food.png", dpi = 600, width = 4, height = 4)
 ggplot(df_Fig_8, aes(x = year, y = Var_housing)) +
     geom_line(colour = "blue", linewidth = 1) +
     labs(title = "Equiv. HH Housing Services", x = "Year", y = "Variance of Log") +
     theme(plot.title = element_text(hjust = 0.5))
-ggsave("Fig_8//Fig_8c_Var_Housing.png", dpi = 600, width = 4, height = 4)
+ggsave("figures/Fig_8/Fig_8c_Var_Housing.png", dpi = 600, width = 4, height = 4)
 ggplot(df_Fig_8, aes(x = year, y = Gini_housing)) +
     geom_line(colour = "blue", linewidth = 1) +
     labs(title = "Equiv. HH Housing Services", x = "Year", y = "Gini Coefficient") +
     theme(plot.title = element_text(hjust = 0.5))
-ggsave("Fig_8//Fig_8d_Gini_Housing.png", dpi = 600, width = 4, height = 4)
+ggsave("figures/Fig_8/Fig_8d_Gini_Housing.png", dpi = 600, width = 4, height = 4)

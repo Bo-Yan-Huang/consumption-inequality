@@ -27,22 +27,22 @@ ggplot(df_Fig_1_wage, aes(x = year, y = Var_wage)) +
     geom_line(colour = "blue", linewidth = 1) +
     labs(title = "Variance of Log Equiv. HH Earnings", x = "Year", y = "Variance of Log") +
     theme(plot.title = element_text(hjust = 0.5))
-ggsave("Fig_1//Fig_1a_Var_Earnings.png", dpi = 600, width = 4, height = 4)
+ggsave("figures/Fig_1/Fig_1a_Var_Earnings.png", dpi = 600, width = 4, height = 4)
 ggplot(df_Fig_1_wage, aes(x = year, y = Gini_wage)) +
     geom_line(colour = "blue", linewidth = 1) +
     labs(title = "Gini Coefficient of Equiv. HH Earnings", x = "Year", y = "Gini Coefficient") +
     theme(plot.title = element_text(hjust = 0.5))
-ggsave("Fig_1//Fig_1b_Gini_Earnings.png", dpi = 600, width = 4, height = 4)
+ggsave("figures/Fig_1/Fig_1b_Gini_Earnings.png", dpi = 600, width = 4, height = 4)
 ggplot(df_Fig_1_wage, aes(x = year, y = P50_P10)) +
     geom_line(colour = "blue", linewidth = 1) +
     labs(title = "P50-P10 Ratio of Equiv. HH Earnings", x = "Year", y = "Ratio") +
     theme(plot.title = element_text(hjust = 0.5))
-ggsave("Fig_1//Fig_1c_P50_P10_Earnings.png", dpi = 600, width = 4, height = 4)
+ggsave("figures/Fig_1/Fig_1c_P50_P10_Earnings.png", dpi = 600, width = 4, height = 4)
 ggplot(df_Fig_1_wage, aes(x = year, y = P90_P50)) +
     geom_line(colour = "blue", linewidth = 1) +
     labs(title = "P90-P50 Ratio of Equiv. HH Earnings", x = "Year", y = "Ratio") +
     theme(plot.title = element_text(hjust = 0.5))
-ggsave("Fig_1//Fig_1d_P90_P50_Earnings.png", dpi = 600, width = 4, height = 4)
+ggsave("figures/Fig_1/Fig_1d_P90_P50_Earnings.png", dpi = 600, width = 4, height = 4)
 
 # Fig 2 for Percentiles of the household earnings distribution 1981
 df_Fig_2_wage <- df_all %>% group_by(year) %>% 
@@ -99,7 +99,7 @@ ggplot(df_Fig_2_wage) +
         labels = c("P5", "P10", "P25", "P50", "P75", "P90", "P95")
     ) +
     theme(plot.title = element_text(hjust = 0.5))
-ggsave("Fig_2//Fig_2_percentiles_1981.png", dpi = 600, width = 9, height = 6)
+ggsave("figures/Fig_2/Fig_2_percentiles_1981.png", dpi = 600, width = 9, height = 6)
 
 # Fig 2 for Percentiles of the household earnings distribution 1995
 df_Fig_2_wage <- df_Fig_2_wage %>%
@@ -130,7 +130,7 @@ ggplot(df_Fig_2_wage) +
         labels = c("P5", "P10", "P25", "P50", "P75", "P90", "P95")
     ) +
     theme(plot.title = element_text(hjust = 0.5))
-ggsave("Fig_2//Fig_2_percentiles_1995.png", dpi = 600, width = 9, height = 6)
+ggsave("figures/Fig_2/Fig_2_percentiles_1995.png", dpi = 600, width = 9, height = 6)
 
 # Fig 3 for Percentiles of the household earnings distribution after 1995
 # plot
@@ -153,4 +153,4 @@ ggplot(df_Fig_2_wage %>% filter(year >= 1995)) +
         labels = c("P5", "P10", "P25", "P50", "P75", "P90", "P95")
     ) +
     theme(plot.title = element_text(hjust = 0.5))
-ggsave("Fig_2//Fig_2_percentiles_a1995.png", dpi = 600, width = 9, height = 6)
+ggsave("figures/Fig_2/Fig_2_percentiles_a1995.png", dpi = 600, width = 9, height = 6)
