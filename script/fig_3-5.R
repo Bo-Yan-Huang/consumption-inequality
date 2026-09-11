@@ -76,7 +76,7 @@ ggsave("figures/Fig_3/Fig_3c_Var_single.png", dpi = 600, width = 5, height = 3)
 df_Fig_3_single <- df_all %>% filter(year >= 1988) %>% 
     group_by(year) %>%
     summarise(married_ratio = sum(marriage == 1, na.rm = T) / sum(!is.na(marriage)),
-              two_earner_ratio = sum(inc_earnings_spouse > 0 & inc_earnings_main > 0, na.rm = T) / sum(!is.na(spouse_id)))
+              two_earner_ratio = sum(inc_earnings_spouse_raw > 0 & inc_earnings_main_raw > 0, na.rm = T) / sum(!is.na(spouse_id)))
 ggplot(df_Fig_3_single, aes(x = year)) +
     geom_line(aes(y = married_ratio), colour = "blue", linewidth = 1) +
     scale_x_continuous(name = "Year",limits = c(1988, 2022)) +
@@ -92,9 +92,11 @@ ggplot(df_Fig_3_single, aes(x = year)) +
     theme(plot.title = element_text(hjust = 0.5))
 ggsave("figures/Fig_3/Fig_3e_two_earner_ratio.png", dpi = 600, width = 5, height = 3)
 # f between-spouse correlation among Two-Earner Cohabiting Couples
-df_Fig_3_correlation <- df_all %>% filter(year >= 1988, inc_earnings_spouse > 0 & inc_earnings_main > 0) %>%
+# NOTE: use the per-earner series here. Dividing both spouses by the same eqi_w
+# adds a common -log(eqi_w) to both logs, which inflates the correlation.
+df_Fig_3_correlation <- df_all %>% filter(year >= 1988, inc_earnings_spouse_raw > 0 & inc_earnings_main_raw > 0) %>%
     group_by(year) %>%
-    summarise(correlation = cor(log(inc_earnings_main, exp(1)), log(inc_earnings_spouse, exp(1)), use = "pairwise.complete.obs"))
+    summarise(correlation = cor(log(inc_earnings_main_raw, exp(1)), log(inc_earnings_spouse_raw, exp(1)), use = "pairwise.complete.obs"))
 ggplot(df_Fig_3_correlation, aes(x = year, y = correlation)) +
     geom_line(colour = "blue", linewidth = 1) +
     scale_x_continuous(name = "Year",limits = c(1988, 2022)) +
