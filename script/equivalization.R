@@ -21,7 +21,13 @@ for(y in years){
     inc_y <- inc_y %>% mutate(across(starts_with('b4_'), .names = 'is_child_{col}', ~ as.integer(. <= 17)))
     inc_y <- inc_y %>% rowwise() %>% mutate(adult_count = sum(pick(starts_with('is_adult_')), na.rm=TRUE)) %>% ungroup()
     inc_y <- inc_y %>% rowwise() %>% mutate(child_count = sum(pick(starts_with('is_child_')), na.rm=TRUE)) %>% ungroup()
-    inc_y$eqi_w <- 1 + (inc_y$adult_count - 1) * 0.7 + inc_y$child_count * 0.5
+    # First person counts 1, each further adult 0.7, each child 0.5. Written as
+    # 1 + (adults - 1) * 0.7 + children * 0.5 the formula assumes the household
+    # has at least one adult; with none it subtracted 0.7 from the base and
+    # returned a weight below 1. Handle the first person explicitly instead.
+    inc_y$eqi_w <- ifelse(inc_y$adult_count >= 1,
+                          1 + (inc_y$adult_count - 1) * 0.7 + inc_y$child_count * 0.5,
+                          1 + pmax(inc_y$child_count - 1, 0) * 0.5)
 
     # demographic
     # marriage year >= 77
