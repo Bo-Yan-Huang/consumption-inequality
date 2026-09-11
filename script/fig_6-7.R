@@ -125,7 +125,7 @@ ggplot(df_Fig_7) +
     geom_line(aes(x = year, y = n_log_P75, colour = "P75"), linewidth = 1) +
     geom_line(aes(x = year, y = n_log_P90, colour = "P90"), linewidth = 1) +
     geom_line(aes(x = year, y = n_log_P95, colour = "P95"), linewidth = 1) +
-    scale_x_continuous(name = "Year", limits = c(1981, 2022)) +
+    scale_x_continuous(name = "Year") +
     scale_y_continuous(name = "Log (normalized to 0 in 1981)") +
     labs(title = "Equivalized Household Consumption", color = "Legend") +
     scale_color_manual(
@@ -157,7 +157,7 @@ ggplot(df_Fig_7) +
     geom_line(aes(x = year, y = n_log_P75, colour = "P75"), linewidth = 1) +
     geom_line(aes(x = year, y = n_log_P90, colour = "P90"), linewidth = 1) +
     geom_line(aes(x = year, y = n_log_P95, colour = "P95"), linewidth = 1) +
-    scale_x_continuous(name = "Year",limits = c(1981, 2022)) +
+    scale_x_continuous(name = "Year") +
     scale_y_continuous(name = "Log (normalized to 0 in 1995)") +
     labs(title = "Equivalized Household Consumption", color = "Legend") +
     scale_color_manual(
@@ -180,7 +180,7 @@ ggplot(df_Fig_7 %>% filter(year >= 1995)) +
     geom_line(aes(x = year, y = n_log_P75, colour = "P75"), linewidth = 1) +
     geom_line(aes(x = year, y = n_log_P90, colour = "P90"), linewidth = 1) +
     geom_line(aes(x = year, y = n_log_P95, colour = "P95"), linewidth = 1) +
-    scale_x_continuous(name = "Year",limits = c(1995, 2022)) +
+    scale_x_continuous(name = "Year") +
     scale_y_continuous(name = "Log (normalized to 0 in 1995)") +
     labs(title = "Equivalized Household Consumption", color = "Legend") +
     scale_color_manual(

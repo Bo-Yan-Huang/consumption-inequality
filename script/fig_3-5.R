@@ -27,7 +27,7 @@ colors <- c("Main Earner" = "blue", "Household" = "red")
 ggplot(df_Fig_3_indHH) +
     geom_line(aes(x = year, y = Var_earnings_max, colour = "Main Earner"), linewidth = 1) +
     geom_line(aes(x = year, y = Var_earnings_HH, colour = "Household"), linewidth = 1) +
-    scale_x_continuous(name = "Year",limits = c(1981, 2022)) +
+    scale_x_continuous(name = "Year") +
     scale_y_continuous(name = "Variance of Log") +
     labs(title = "Variance of Log Earnings") +
     scale_color_manual(
@@ -42,7 +42,7 @@ ggsave("figures/Fig_3/Fig_3a_Var_indHH.png", dpi = 600, width = 5, height = 3)
 ggplot(df_Fig_3_indHH) +
     geom_line(aes(x = year, y = Gini_earnings_max, colour = "Main Earner"), linewidth = 1) +
     geom_line(aes(x = year, y = Gini_earnings_HH, colour = "Household"), linewidth = 1) +
-    scale_x_continuous(name = "Year",limits = c(1981, 2022)) +
+    scale_x_continuous(name = "Year") +
     scale_y_continuous(name = "Gini Coefficient") +
     labs(title = "Gini Coefficient of Earnings") +
     scale_color_manual(
@@ -102,7 +102,7 @@ df_Fig_3_single <- df_all %>% group_by(year, marriage) %>%
     filter(!is.na(marriage))
 ggplot(df_Fig_3_single, aes(x = year, y = Var_earnings, colour = factor(marriage))) +
     geom_line(linewidth = 1) +
-    scale_x_continuous(name = "Year",limits = c(1988, 2022)) +
+    scale_x_continuous(name = "Year") +
     scale_y_continuous(name = "Variance of Log") +
     labs(title = "Variance of Log Earnings") +
     scale_color_manual(
@@ -120,14 +120,14 @@ df_Fig_3_single <- df_all %>% filter(year >= 1988) %>%
               two_earner_ratio = sum(inc_earnings_spouse_raw > 0 & inc_earnings_main_raw > 0, na.rm = T) / sum(!is.na(spouse_id)))
 ggplot(df_Fig_3_single, aes(x = year)) +
     geom_line(aes(y = married_ratio), colour = "blue", linewidth = 1) +
-    scale_x_continuous(name = "Year",limits = c(1988, 2022)) +
+    scale_x_continuous(name = "Year") +
     scale_y_continuous(name = "Ratio") +
     labs(title = "Fraction of Married Households \n Among All Households") +
     theme(plot.title = element_text(hjust = 0.5))
 ggsave("figures/Fig_3/Fig_3d_married_ratio.png", dpi = 600, width = 5, height = 3)
 ggplot(df_Fig_3_single, aes(x = year)) +
     geom_line(aes(y = two_earner_ratio), colour = "blue", linewidth = 1) +
-    scale_x_continuous(name = "Year",limits = c(1988, 2022)) +
+    scale_x_continuous(name = "Year") +
     scale_y_continuous(name = "Ratio") +
     labs(title = "Fraction of Two-Earner Households \n Among Cohabiting Couples") +
     theme(plot.title = element_text(hjust = 0.5))
@@ -140,7 +140,7 @@ df_Fig_3_correlation <- df_all %>% filter(year >= 1988, inc_earnings_spouse_raw 
     summarise(correlation = cor(log(inc_earnings_main_raw, exp(1)), log(inc_earnings_spouse_raw, exp(1)), use = "pairwise.complete.obs"))
 ggplot(df_Fig_3_correlation, aes(x = year, y = correlation)) +
     geom_line(colour = "blue", linewidth = 1) +
-    scale_x_continuous(name = "Year",limits = c(1988, 2022)) +
+    scale_x_continuous(name = "Year") +
     scale_y_continuous(name = "Correlation") +
     labs(title = "Between-Spouse Corr. of Log Earnings \n Among Two-Earner Cohabiting Couples") +
     theme(plot.title = element_text(hjust = 0.5))
