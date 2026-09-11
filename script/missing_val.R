@@ -7,9 +7,6 @@ library(tidyverse)
 library(haven)
 library(ggplot2)
 
-# read the file of cpi 
-cpi <- read.csv("cpi_70_112.csv") %>% as_tibble()
-
 years <- c(70:112)
 
 df <- tibble()
@@ -23,7 +20,7 @@ for(y in years){
         itm240_na = sum(is.na(itm240)),
         total_rows = n()
     )
-    na_count <- na_count %>% mutate(year = y)
+    na_count <- na_count %>% mutate(year = 1911 + y)
     na_count <- na_count %>% select(year, everything())
     na_count <- na_count %>% mutate(
         itm190_na_ratio = itm190_na / total_rows,
@@ -34,8 +31,10 @@ for(y in years){
     print(paste("Processed year:", y))
 }
 
-df[32, "itm190_na_ratio"] <- NA
-df[32, "itm240_na_ratio"] <- NA
+# 2012 has demographics but no income or expenditure data, so its missing
+# rate is not comparable; blank it rather than drawing a spurious spike.
+df <- df %>% mutate(itm190_na_ratio = ifelse(year == 2012, NA, itm190_na_ratio),
+                    itm240_na_ratio = ifelse(year == 2012, NA, itm240_na_ratio))
 
 ggplot(df, aes(x = year, y = itm190_na_ratio)) +
     geom_line(color = "blue") +
