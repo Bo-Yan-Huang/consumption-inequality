@@ -97,14 +97,15 @@ df_Fig_7 <- df_all %>% group_by(year) %>%
               P75 = weighted.quantile(exp_consumption, weight, prob = 0.75),
               P90 = weighted.quantile(exp_consumption, weight, prob = 0.9),
               P95 = weighted.quantile(exp_consumption, weight, prob = 0.95))
+base_1981 <- df_Fig_7 %>% filter(year == 1981)
 df_Fig_7 <- df_Fig_7 %>%
-    mutate(n_P5 = P5 - as.numeric(df_Fig_7[1, "P5"]),
-           n_P10 = P10 - as.numeric(df_Fig_7[1, "P10"]),
-           n_P25 = P25 - as.numeric(df_Fig_7[1, "P25"]),
-           n_P50 = P50 - as.numeric(df_Fig_7[1, "P50"]),
-           n_P75 = P75 - as.numeric(df_Fig_7[1, "P75"]),
-           n_P90 = P90 - as.numeric(df_Fig_7[1, "P90"]),
-           n_P95 = P95 - as.numeric(df_Fig_7[1, "P95"]))
+    mutate(n_P5 = P5 - base_1981$P5,
+           n_P10 = P10 - base_1981$P10,
+           n_P25 = P25 - base_1981$P25,
+           n_P50 = P50 - base_1981$P50,
+           n_P75 = P75 - base_1981$P75,
+           n_P90 = P90 - base_1981$P90,
+           n_P95 = P95 - base_1981$P95)
 df_Fig_7 <- df_Fig_7 %>%
     mutate(log_P5 = log(P5, exp(1)),
            log_P10 = log(P10, exp(1)),
@@ -113,14 +114,15 @@ df_Fig_7 <- df_Fig_7 %>%
            log_P75 = log(P75, exp(1)),
            log_P90 = log(P90, exp(1)),
            log_P95 = log(P95, exp(1)))
+base_1981 <- df_Fig_7 %>% filter(year == 1981)
 df_Fig_7 <- df_Fig_7 %>%
-    mutate(n_log_P5 = log_P5 - as.numeric(df_Fig_7[1, "log_P5"]),
-           n_log_P10 = log_P10 - as.numeric(df_Fig_7[1, "log_P10"]),
-           n_log_P25 = log_P25 - as.numeric(df_Fig_7[1, "log_P25"]),
-           n_log_P50 = log_P50 - as.numeric(df_Fig_7[1, "log_P50"]),
-           n_log_P75 = log_P75 - as.numeric(df_Fig_7[1, "log_P75"]),
-           n_log_P90 = log_P90 - as.numeric(df_Fig_7[1, "log_P90"]),
-           n_log_P95 = log_P95 - as.numeric(df_Fig_7[1, "log_P95"]))
+    mutate(n_log_P5 = log_P5 - base_1981$log_P5,
+           n_log_P10 = log_P10 - base_1981$log_P10,
+           n_log_P25 = log_P25 - base_1981$log_P25,
+           n_log_P50 = log_P50 - base_1981$log_P50,
+           n_log_P75 = log_P75 - base_1981$log_P75,
+           n_log_P90 = log_P90 - base_1981$log_P90,
+           n_log_P95 = log_P95 - base_1981$log_P95)
 # plot
 colors <- c("P5" = "blue", "P10" = "green", "P25" = "red", "P50" = "cyan", 
             "P75" = "purple", "P90" = "yellow", "P95" = "black")
@@ -146,14 +148,15 @@ ggplot(df_Fig_7) +
 ggsave("figures/Fig_7/Fig_7_percentiles_1981.png", dpi = 600, width = 9, height = 6)
 
 # Fig7 Percentiles of the household consumption distribution 1995
+base_1995 <- df_Fig_7 %>% filter(year == 1995)
 df_Fig_7 <- df_Fig_7 %>%
-    mutate(n_log_P5 = log_P5 - as.numeric(df_Fig_7[15, "log_P5"]),
-           n_log_P10 = log_P10 - as.numeric(df_Fig_7[15, "log_P10"]),
-           n_log_P25 = log_P25 - as.numeric(df_Fig_7[15, "log_P25"]),
-           n_log_P50 = log_P50 - as.numeric(df_Fig_7[15, "log_P50"]),
-           n_log_P75 = log_P75 - as.numeric(df_Fig_7[15, "log_P75"]),
-           n_log_P90 = log_P90 - as.numeric(df_Fig_7[15, "log_P90"]),
-           n_log_P95 = log_P95 - as.numeric(df_Fig_7[15, "log_P95"]))
+    mutate(n_log_P5 = log_P5 - base_1995$log_P5,
+           n_log_P10 = log_P10 - base_1995$log_P10,
+           n_log_P25 = log_P25 - base_1995$log_P25,
+           n_log_P50 = log_P50 - base_1995$log_P50,
+           n_log_P75 = log_P75 - base_1995$log_P75,
+           n_log_P90 = log_P90 - base_1995$log_P90,
+           n_log_P95 = log_P95 - base_1995$log_P95)
 # plot
 ggplot(df_Fig_7) +
     geom_line(aes(x = year, y = n_log_P5, colour = "P5"), linewidth = 1) +
