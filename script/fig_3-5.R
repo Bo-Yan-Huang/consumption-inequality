@@ -155,17 +155,21 @@ ggsave("figures/Fig_3/Fig_3f_correlation.png", dpi = 600, width = 5, height = 3)
 
 # Fig6 Private transfers and asset income
 colors <- c("HH Earnings" = "blue", "HH Earnings + Priv. Transf." = "red", "HH Earnings + Asset Income" = "green", "HH Earnings + Priv. Transf. + Asset Income" = "purple")
+# All four lines use the earnings sample, so they differ only by the income
+# component added. On all households, the asset-income line mixed in
+# households with no earnings and a few dollars of interest, and its variance
+# of logs reached about 4.
 # fill 0 for NA inc_earnings, inc_ptransfer, inc_investment
-df_all <- df_all %>% mutate(across(c(inc_earnings, inc_ptransfer, inc_investment), ~ ifelse(is.na(.), 0, .)))
-df_all <- df_all %>% mutate(inc_earnings_ptransfer = inc_earnings + inc_ptransfer,
-                            inc_earnings_investment = inc_earnings + inc_investment,
-                            inc_earnings_ptransfer_investment = inc_earnings + inc_ptransfer + inc_investment)
+df_Fig_4 <- df_earn %>% mutate(across(c(inc_earnings, inc_ptransfer, inc_investment), ~ ifelse(is.na(.), 0, .)))
+df_Fig_4 <- df_Fig_4 %>% mutate(inc_earnings_ptransfer = inc_earnings + inc_ptransfer,
+                                inc_earnings_investment = inc_earnings + inc_investment,
+                                inc_earnings_ptransfer_investment = inc_earnings + inc_ptransfer + inc_investment)
 # turn 0 to NA inc_earnings, inc_ptransfer, inc_investment, inc_earnings_ptransfer, inc_earnings_ptransfer_investment
-df_all <- df_all %>% mutate(across(c(inc_earnings, inc_ptransfer, inc_investment, 
-                                      inc_earnings_ptransfer, inc_earnings_investment, inc_earnings_ptransfer_investment), 
-                                   ~ ifelse(. == 0, NA, .)))
+df_Fig_4 <- df_Fig_4 %>% mutate(across(c(inc_earnings, inc_ptransfer, inc_investment,
+                                          inc_earnings_ptransfer, inc_earnings_investment, inc_earnings_ptransfer_investment),
+                                       ~ ifelse(. == 0, NA, .)))
 # calculate variance and Gini coefficient for each year
-df_Fig_4_inc <- df_all %>% group_by(year) %>% 
+df_Fig_4_inc <- df_Fig_4 %>% group_by(year) %>%
     summarise(Var_1 = weighted.var(log(inc_earnings, exp(1)), weight, na.rm = T),
               Var_2 = weighted.var(log(inc_earnings_ptransfer, exp(1)), weight, na.rm = T),
               Var_3 = weighted.var(log(inc_earnings_investment, exp(1)), weight, na.rm = T),
@@ -181,6 +185,8 @@ ggplot(df_Fig_4_inc) +
     geom_line(aes(x = year, y = Var_3, colour = "HH Earnings + Asset Income"), linewidth = 1) +
     geom_line(aes(x = year, y = Var_4, colour = "HH Earnings + Priv. Transf. + Asset Income"), linewidth = 1) +
     labs(title = "Var. of Log Income", x = "Year", y = "Variance of Log") +
+    # headroom for the legend; expand_limits widens the axis without dropping data
+    expand_limits(y = 0.65) +
     scale_color_manual(
         guide = guide_legend(title = NULL),
         values = colors,
@@ -188,7 +194,7 @@ ggplot(df_Fig_4_inc) +
         labels = c("HH Earnings", "+ Priv. Transf.", "+ Asset Income", "+ Priv. Transf. + Asset Income")
     ) +
     theme(plot.title = element_text(hjust = 0.5),
-          legend.position = c(0.32, 0.8))
+          legend.position = c(0.32, 0.83))
 ggsave("figures/Fig_4/Fig_4a_Var_inc.png", dpi = 600, width = 4, height = 4)
 ggplot(df_Fig_4_inc) +
     geom_line(aes(x = year, y = Gini_1), colour = colors[1], linewidth = 1) +
