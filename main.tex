@@ -70,11 +70,9 @@ The survey samples around 16,000 households each year; however, the NA rate of s
     \caption{Missing Rate of Labor Earnings and Industry Earnings in SFIE}
     \label{fig:missing}
 \end{figure}
-In the SFIE, both zero and no response are treated as missing values, which can lead to an underestimation of income and consumption inequality if we treat all missing values as zero.
-Therefore, the analysis in this paper will focus on households with positive earnings and consumption expenditures aligned with the design proposed by Heathcote, Perri, \& Violante (\citeyear{HEATHCOTE_2010}).
-I treat the missing values as zero when doing addition and subtraction, such as calculating household earnings as the sum of labor and industry earnings.
-Note that there is a missing value in 2012 of Figure \ref{fig:missing}, this is because the data file of SFIE for 2012 has all the demographic information, but the income and expenditure data are ALL missing values.
-Therefore, I exclude the 2012 data from the analysis.
+In the SFIE, both a true zero and a non-response are recorded as missing values, so the two cannot be told apart, and treating every missing value as zero would understate income and consumption levels at the bottom of the distribution.
+The gap at 2012 in Figure \ref{fig:missing} has a different cause: the SFIE data file for 2012 contains all the demographic information, but every income and expenditure value is missing.
+Section \ref{sec:sample} sets out how the analysis sample is built from these data.
 
 \subsection{CPI adjustment}
 
@@ -91,6 +89,21 @@ Figure \ref{fig:CPI} shows the CPI in Taiwan from 1981 to 2023 normalized to 100
 \subsection{Equivalize Household Income and Consumption}
 
 To compare households of different sizes and compositions, I use the OECD equivalence scale to adjust household income and consumption to per-adult-equivalent levels. The OECD scale assigns a weight of 1 to the first adult, 0.7 to each additional adult, and 0.5 to each child. For the definition of child, I define a child as age 17 or younger, the original OECD definition is age 13 or younger. Individual-level earnings, for the main earner and for the spouse, are divided by the same household weight, so that they can be placed on a common scale with household aggregates. The one exception is the between-spouse correlation in Section \ref{sec:household_inequality}, where both spouses would be divided by the same weight and doing so would inflate the correlation mechanically; there the earnings are left on a per-earner basis.
+
+\subsection{Sample Restrictions}
+\label{sec:sample}
+
+The sample is built in four steps, applied in this order.
+\begin{enumerate}
+    \item The 2012 survey year is excluded, since its income and expenditure values are all missing.
+    \item When an income or expenditure concept is a sum or difference of survey items, such as household earnings as the sum of labor and industry earnings, a missing item is treated as zero.
+    \item Each statistic is computed over the households with a strictly positive value of the variable it describes, so that every logarithm is defined. Zero, negative and missing values are excluded. This applies to every income and consumption concept in the paper, following the design of Heathcote, Perri, \& Violante (\citeyear{HEATHCOTE_2010}).
+    \item For household earnings, households whose equivalized earnings fall below 5\% of that year's weighted median are also excluded, the median being taken over households with positive earnings. The remaining households form the earnings sample. Every earnings statistic in Figures \ref{fig:earnings_inequality} to \ref{fig:Trans_Asset} and their appendix counterparts is computed on it, including those for the main earner and for the income concepts that add private transfers and asset income to earnings. The exceptions are the household-structure panels of Figure \ref{fig:Indi_to_HH}, namely the shares of married and two-earner households and the between-spouse correlation, which describe all households and count anyone with positive earnings as an earner.
+\end{enumerate}
+
+Step 4 is needed because the two main dispersion measures in this paper react very differently to earnings close to zero. A household with trivially small positive earnings contributes a logarithm far below the mean, which raises the variance of logs substantially, while it barely changes the Gini coefficient. Such households are rare early in the sample and become much more common after 2015. Without step 4, the variance of log household earnings more than triples between 1981 and 2023, from 0.29 to 0.97, while the Gini on the same households rises only from 0.29 to 0.36. With it, the variance rises from 0.28 to 0.48 and the Gini from 0.29 to 0.35, so the two measures describe the same trend. Appendix \ref{sec:appendix_sample} compares the two samples year by year. The restriction removes 0.6\% of households with positive earnings over the whole period, at most 0.8\% in any year before 2016, and between 0.8\% and 2.2\% a year from 2016.
+
+Excluding observations close to zero is common practice when dispersion is measured in logarithms. Heathcote, Perri, \& Violante (\citeyear{HEATHCOTE_2010}) exclude households with non-positive earnings and then the bottom 0.5\% of the remaining distribution, reapplying the trim to each definition of income, because the variance of logs is very sensitive to realizations close to zero. Guvenen, Pistaferri, \& Violante (\citeyear{GRID_2022}) drop earnings below a threshold tied to the minimum wage, so that records of workers without a meaningful attachment to the labor force do not skew log-based statistics. The Luxembourg Income Study bottom-coded incomes at 1\% of mean equivalized household income (Neugschwender, \citeyear{LIS_coding}). Like the LIS rule, which anchors its floor to the mean, this paper ties the floor to each year's distribution, at 5\% of the median, rather than trimming a fixed share of each year's sample. The share of households near zero grows from about 0.1\% of positive earners in the early 1980s to around 2\% from 2018, so a fixed share cannot remove them in every year: trimming the bottom 0.5\% each year, as Heathcote, Perri, \& Violante (\citeyear{HEATHCOTE_2010}) do, leaves the 2023 variance at 0.69, against 0.48 under the 5\% floor.
 
 \section{Household-level Inequality}
 \label{sec:household_inequality}
@@ -382,6 +395,28 @@ While Taiwan's inequality remains moderate by international standards, emerging 
     \includegraphics[width=0.88\textwidth]{figures/Fig_7/Fig_7_percentiles_1995.png}
     \caption{Percentiles of the Household Consumption Distribution, 1981 - 2023, Normalized to 1995}
     \label{fig:appendix_cyclic_consumption_1995}
+\end{figure}
+
+\clearpage
+\section{Earnings Sample Restriction}
+\label{sec:appendix_sample}
+
+Figure \ref{fig:appendix_sample} compares household earnings inequality on all households with positive earnings and on the earnings sample of Section \ref{sec:sample}. The two variance series stay within 0.1 of each other until 2015 and then separate. On all positive earners the variance jumps to 0.96 in 2018 and 1.12 in 2022, while on the earnings sample it stays between 0.43 and 0.50. The two Gini series differ by at most 0.004 before 2016 and at most 0.014 after.
+
+The lognormal distribution gives a way to check which pair of numbers is consistent. Under lognormality a Gini coefficient of $G$ implies a variance of logs of $2\left[\Phi^{-1}\left((1+G)/2\right)\right]^2$, where $\Phi$ is the standard normal distribution function. In 2023 the Gini of 0.362 on all positive earners implies a variance of 0.44, against a measured 0.97. On the earnings sample the Gini of 0.349 implies 0.41, against a measured 0.48.
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[t]{0.495\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/Fig_1/Fig_1e_Var_trim.png}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.495\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/Fig_1/Fig_1f_Gini_trim.png}
+    \end{subfigure}
+    \caption{Household Earnings Inequality With and Without the Earnings Sample Restriction}
+    \label{fig:appendix_sample}
 \end{figure}
 
 \end{appendices}
