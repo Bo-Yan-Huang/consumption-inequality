@@ -226,10 +226,11 @@ The middle two panels of Figure \ref{fig:Indi_to_HH} show the relation between s
     \label{fig:Trans_Asset}
 \end{figure}
 
-In Figure \ref{fig:Trans_Asset}, we discuss other income sources beyond basic earnings, including investment in assets and private transfers. 
-We can see that asset income increases inequality while transfers reduce it, suggesting that there is a negative correlation between income and private transfers. 
-This correlation aligns with the assumption that beyond the household, the family or clan can smooth out income shock using private transfer. 
-In particular, the effect of private transfer smoothing out asset inequality was not effective before 1995. However, it has played a key role in reducing inequality since 2010.
+In Figure \ref{fig:Trans_Asset}, we discuss other income sources beyond basic earnings, including investment in assets and private transfers. All four series are computed on the earnings sample, so they differ only by the income component added.
+Asset income increases inequality while private transfers reduce it. Adding asset income raises the Gini coefficient in every year, by between 0.002 and 0.008, and changes the variance of logs by at most 0.03. Adding private transfers lowers both measures in every year. For transfers to lower inequality in this way, they must make up a larger share of income for households with low earnings than for those with high earnings.
+This pattern aligns with the assumption that beyond the household, the family or clan can smooth out income shocks using private transfers. 
+The two components are also nearly unrelated: among households with either a private transfer or asset income, the correlation between the two amounts lies between $-0.02$ and $0.07$ in every year (Appendix Figure \ref{fig:appendix_corr}), so larger transfers do not go systematically to households with more asset income.
+In particular, the equalizing effect of private transfers has grown over time. Adding them lowers the Gini coefficient by 0.010 on average before 1995, by 0.032 between 1995 and 2009, and by 0.051 since 2010.
 
 \begin{figure}[t]
     \centering
@@ -417,6 +418,19 @@ The lognormal distribution gives a way to check which pair of numbers is consist
     \end{subfigure}
     \caption{Household Earnings Inequality With and Without the Earnings Sample Restriction}
     \label{fig:appendix_sample}
+\end{figure}
+
+\clearpage
+\section{Private Transfers and Asset Income}
+\label{sec:appendix_corr}
+
+Figure \ref{fig:appendix_corr} plots, for each year, the Pearson correlation between equivalized private transfers and equivalized asset income among households that receive either. It is computed on all households rather than the earnings sample, since it does not involve earnings. The correlation lies between $-0.02$ (1981) and $0.07$ (2000) and is close to zero throughout, so the size of a household's private transfers is almost unrelated to the size of its asset income.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/Fig_4/Fig_4e_corr_transfer_asset.png}
+    \caption{Correlation of Private Transfers and Asset Income, 1981 - 2023}
+    \label{fig:appendix_corr}
 \end{figure}
 
 \end{appendices}
