@@ -213,6 +213,16 @@ df_Fig_4_correlation <- df_TEMP %>%
     group_by(year) %>%
     summarise(correlation = cor(inc_ptransfer, inc_investment, use = "pairwise.complete.obs"))
 print(df_Fig_4_correlation, n=100)
+# reported in the appendix: Pearson correlation of the two levels among
+# households with either a private transfer or asset income
+ggplot(df_Fig_4_correlation, aes(x = year, y = correlation)) +
+    geom_hline(yintercept = 0, colour = "grey40") +
+    geom_line(colour = "blue", linewidth = 1) +
+    scale_x_continuous(name = "Year") +
+    scale_y_continuous(name = "Correlation") +
+    labs(title = "Correlation of Private Transfers and Asset Income") +
+    theme(plot.title = element_text(hjust = 0.5))
+ggsave("figures/Fig_4/Fig_4e_corr_transfer_asset.png", dpi = 600, width = 5, height = 3)
 # plot
 ggplot(df_Fig_4_inc) +
     geom_line(aes(x = year, y = Var_1), colour = colors[1], linewidth = 1) +
