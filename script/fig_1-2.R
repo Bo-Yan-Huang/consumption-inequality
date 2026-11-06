@@ -153,3 +153,37 @@ ggplot(df_Fig_2_wage %>% filter(year >= 1995)) +
     ) +
     theme(plot.title = element_text(hjust = 0.5))
 ggsave("figures/Fig_2/Fig_2_percentiles_a1995.png", dpi = 600, width = 9, height = 6)
+
+# Appendix: the earnings sample against all households with positive earnings,
+# to show what the 5%-of-median floor removes from each dispersion measure.
+df_Fig_1_trim <- bind_rows(
+    df_all %>% filter(!is.na(inc_earnings)) %>% mutate(sample = "all"),
+    df_earn %>% mutate(sample = "earn")) %>%
+    group_by(year, sample) %>%
+    summarise(Var_wage = weighted.var(log(inc_earnings, exp(1)), weight, na.rm = T),
+              Gini_wage = Gini(inc_earnings, weight, na.rm = T), .groups = "drop")
+colors <- c("all" = "red", "earn" = "blue")
+ggplot(df_Fig_1_trim, aes(x = year, y = Var_wage, colour = sample)) +
+    geom_line(linewidth = 1) +
+    labs(title = "Variance of Log Equiv. HH Earnings", x = "Year", y = "Variance of Log") +
+    scale_color_manual(
+        guide = guide_legend(title = NULL),
+        values = colors,
+        breaks = c("all", "earn"),
+        labels = c("All positive earnings", "Earnings sample")
+    ) +
+    theme(plot.title = element_text(hjust = 0.5),
+          legend.position = c(0.27, 0.8))
+ggsave("figures/Fig_1/Fig_1e_Var_trim.png", dpi = 600, width = 5, height = 3)
+ggplot(df_Fig_1_trim, aes(x = year, y = Gini_wage, colour = sample)) +
+    geom_line(linewidth = 1) +
+    labs(title = "Gini Coefficient of Equiv. HH Earnings", x = "Year", y = "Gini Coefficient") +
+    scale_color_manual(
+        guide = guide_legend(title = NULL),
+        values = colors,
+        breaks = c("all", "earn"),
+        labels = c("All positive earnings", "Earnings sample")
+    ) +
+    theme(plot.title = element_text(hjust = 0.5),
+          legend.position = c(0.27, 0.8))
+ggsave("figures/Fig_1/Fig_1f_Gini_trim.png", dpi = 600, width = 5, height = 3)
