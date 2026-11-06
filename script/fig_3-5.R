@@ -12,9 +12,9 @@ df_all <- read.csv("HH_inc_exp//HH_all.csv") %>% as_tibble()
 df_all <- df_all %>% filter(year != 2012)
 
 # !!NOTE: some NA are zero and some NA are missing val.
-# we turn all 0 to NA for earnings
-df_all <- df_all %>% mutate(inc_earnings = ifelse(inc_earnings <= 100, NA, inc_earnings))
-df_all <- df_all %>% mutate(across(starts_with('inc_earnings_'), ~ ifelse(. <= 100, NA, .)))
+# keep strictly positive earnings; zero and non-positive become NA
+df_all <- df_all %>% mutate(inc_earnings = ifelse(inc_earnings <= 0, NA, inc_earnings))
+df_all <- df_all %>% mutate(across(starts_with('inc_earnings_'), ~ ifelse(. <= 0, NA, .)))
 
 # Fig 5 From individual to HH inequality
 df_Fig_3_indHH <- df_all %>% group_by(year) %>% 

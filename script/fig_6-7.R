@@ -20,8 +20,8 @@ df_all <- df_all %>% mutate(Pre_Govt = inc_total - inc_gtransfer,
 # turn 0 to NA inc_gtransfer, inc_total, exp_tax, Pre_Govt, Pre_Tax, Disposable
 df_all <- df_all %>% mutate(across(c(inc_gtransfer, inc_total, exp_tax, Pre_Govt, Pre_Tax, Disposable), 
                                    ~ ifelse(. <= 0, NA, .)))
-# NA exp
-df_all <- df_all %>% mutate(across(starts_with('exp_'), ~ ifelse(. <= 100, NA, .)))
+# keep strictly positive expenditure; zero and non-positive become NA
+df_all <- df_all %>% mutate(across(starts_with('exp_'), ~ ifelse(. <= 0, NA, .)))
 
 # Fig6 Equiv. Disp. Inc. & Equiv. Consumption
 df_Fig_6 <- df_all %>% group_by(year) %>% 
