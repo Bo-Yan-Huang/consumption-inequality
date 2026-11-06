@@ -16,8 +16,13 @@ df_all <- df_all %>% filter(year != 2012)
 df_all <- df_all %>% mutate(inc_earnings = ifelse(inc_earnings <= 0, NA, inc_earnings))
 df_all <- df_all %>% mutate(across(starts_with('inc_earnings'), ~ ifelse(. <= 0, NA, .)))
 
+# Earnings sample: drop households below 5% of the year's median earnings.
+# Every earnings inequality statistic below is computed on df_earn.
+source("script//earnings_sample.R")
+df_earn <- earnings_sample(df_all)
+
 # Fig 1 for wage
-df_Fig_1_wage <- df_all %>% group_by(year) %>% 
+df_Fig_1_wage <- df_earn %>% group_by(year) %>% 
     summarise(Var_wage = weighted.var(log(inc_earnings, exp(1)), weight, na.rm = T),
               Gini_wage = Gini(inc_earnings, weight, na.rm = T),
               P50_P10 = weighted.quantile(inc_earnings, weight, prob = 0.5) / weighted.quantile(inc_earnings, weight, prob = 0.1),
@@ -45,7 +50,7 @@ ggplot(df_Fig_1_wage, aes(x = year, y = P90_P50)) +
 ggsave("figures/Fig_1/Fig_1d_P90_P50_Earnings.png", dpi = 600, width = 4, height = 4)
 
 # Fig 2 for Percentiles of the household earnings distribution 1981
-df_Fig_2_wage <- df_all %>% group_by(year) %>% 
+df_Fig_2_wage <- df_earn %>% group_by(year) %>% 
     summarise(P5 = weighted.quantile(inc_earnings, weight, prob = 0.05),
               P10 = weighted.quantile(inc_earnings, weight, prob = 0.1),
               P25 = weighted.quantile(inc_earnings, weight, prob = 0.25),
