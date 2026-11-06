@@ -12,9 +12,9 @@ df_all <- read.csv("HH_inc_exp//HH_all.csv") %>% as_tibble()
 df_all <- df_all %>% filter(year != 2012)
 
 # !!NOTE: some NA are zero and some NA are missing val.
-# we turn all 0 to NA for earnings
-df_all <- df_all %>% mutate(inc_earnings = ifelse(inc_earnings <= 100, NA, inc_earnings))
-df_all <- df_all %>% mutate(across(starts_with('inc_earnings'), ~ ifelse(. <= 100, NA, .)))
+# keep strictly positive earnings; zero and non-positive become NA
+df_all <- df_all %>% mutate(inc_earnings = ifelse(inc_earnings <= 0, NA, inc_earnings))
+df_all <- df_all %>% mutate(across(starts_with('inc_earnings'), ~ ifelse(. <= 0, NA, .)))
 
 # Fig 1 for wage
 df_Fig_1_wage <- df_all %>% group_by(year) %>% 
