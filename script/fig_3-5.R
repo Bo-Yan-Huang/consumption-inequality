@@ -22,7 +22,8 @@ df_all <- df_all %>% mutate(across(starts_with('inc_earnings_'), ~ ifelse(. <= 0
 # and the reverse.
 source("script//sample_floor.R")
 df_floor <- df_all %>% group_by(year) %>%
-    mutate(across(c(inc_earnings, inc_earnings_max, inc_earnings_max_raw), ~ floor_na(.x, weight))) %>%
+    mutate(across(c(inc_earnings, inc_earnings_max, inc_earnings_max_raw,
+                    inc_earnings_main_raw, inc_earnings_spouse_raw), ~ floor_na(.x, weight))) %>%
     ungroup()
 
 # Earnings sample for Figure 4: households above the household earnings floor.
@@ -128,12 +129,13 @@ ggplot(df_Fig_3_single, aes(x = year, y = Var_earnings, colour = factor(marriage
     theme(plot.title = element_text(hjust = 0.5),
           legend.position = c(0.17, 0.75))
 ggsave("figures/Fig_3/Fig_3c_Var_single.png", dpi = 600, width = 5, height = 3)
-# Household structure (3d-3f) describes all households, not the earnings
-# sample; an earner here is anyone with positive earnings.
-df_Fig_3_single <- df_all %>% filter(year >= 1988) %>% 
+# Household structure (3d-3f) describes all households. A head or spouse
+# counts as an earner when their own earnings clear the floor for their
+# series, the same rule as every other earnings statistic.
+df_Fig_3_single <- df_floor %>% filter(year >= 1988) %>% 
     group_by(year) %>%
     summarise(married_ratio = sum(marriage == 1, na.rm = T) / sum(!is.na(marriage)),
-              two_earner_ratio = sum(inc_earnings_spouse_raw > 0 & inc_earnings_main_raw > 0, na.rm = T) / sum(!is.na(spouse_id)))
+              two_earner_ratio = sum(!is.na(inc_earnings_spouse_raw) & !is.na(inc_earnings_main_raw)) / sum(!is.na(spouse_id)))
 ggplot(df_Fig_3_single, aes(x = year)) +
     geom_line(aes(y = married_ratio), colour = "blue", linewidth = 1) +
     scale_x_continuous(name = "Year") +
@@ -151,7 +153,7 @@ ggsave("figures/Fig_3/Fig_3e_two_earner_ratio.png", dpi = 600, width = 5, height
 # f between-spouse correlation among Two-Earner Cohabiting Couples
 # NOTE: use the per-earner series here. Dividing both spouses by the same eqi_w
 # adds a common -log(eqi_w) to both logs, which inflates the correlation.
-df_Fig_3_correlation <- df_all %>% filter(year >= 1988, inc_earnings_spouse_raw > 0 & inc_earnings_main_raw > 0) %>%
+df_Fig_3_correlation <- df_floor %>% filter(year >= 1988, !is.na(inc_earnings_spouse_raw), !is.na(inc_earnings_main_raw)) %>%
     group_by(year) %>%
     summarise(correlation = cor(log(inc_earnings_main_raw, exp(1)), log(inc_earnings_spouse_raw, exp(1)), use = "pairwise.complete.obs"))
 ggplot(df_Fig_3_correlation, aes(x = year, y = correlation)) +
