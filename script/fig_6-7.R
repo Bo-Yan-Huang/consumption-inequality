@@ -22,6 +22,12 @@ df_all <- df_all %>% mutate(across(c(inc_gtransfer, inc_total, exp_tax, Pre_Govt
                                    ~ ifelse(. <= 0, NA, .)))
 # keep strictly positive expenditure; zero and non-positive become NA
 df_all <- df_all %>% mutate(across(starts_with('exp_'), ~ ifelse(. <= 0, NA, .)))
+# Each series keeps values of at least 5% of that year's median of the same
+# series (script/sample_floor.R), set series by series.
+source("script//sample_floor.R")
+df_all <- df_all %>% group_by(year) %>%
+    mutate(across(c(Disposable, exp_consumption, exp_food, exp_housing), ~ floor_na(.x, weight))) %>%
+    ungroup()
 
 # Fig6 Equiv. Disp. Inc. & Equiv. Consumption
 df_Fig_6 <- df_all %>% group_by(year) %>% 
