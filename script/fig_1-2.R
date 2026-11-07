@@ -18,8 +18,10 @@ df_all <- df_all %>% mutate(across(starts_with('inc_earnings'), ~ ifelse(. <= 0,
 
 # Earnings sample: drop households below 5% of the year's median earnings.
 # Every earnings inequality statistic below is computed on df_earn.
-source("script//earnings_sample.R")
-df_earn <- earnings_sample(df_all)
+source("script//sample_floor.R")
+df_earn <- df_all %>% group_by(year) %>%
+    mutate(inc_earnings = floor_na(inc_earnings, weight)) %>%
+    ungroup() %>% filter(!is.na(inc_earnings))
 
 # Fig 1 for wage
 df_Fig_1_wage <- df_earn %>% group_by(year) %>% 
