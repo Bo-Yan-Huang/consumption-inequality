@@ -16,15 +16,22 @@ df_all <- df_all %>% filter(year != 2012)
 df_all <- df_all %>% mutate(inc_earnings = ifelse(inc_earnings <= 0, NA, inc_earnings))
 df_all <- df_all %>% mutate(across(starts_with('inc_earnings_'), ~ ifelse(. <= 0, NA, .)))
 
-# Earnings sample: drop households below 5% of the year's median earnings.
-# Every earnings inequality statistic below is computed on df_earn.
+# Each earnings series keeps values of at least 5% of that year's median of
+# the same series (script/sample_floor.R). The floor is set series by series:
+# a household below it for the main earner still counts for the household,
+# and the reverse.
 source("script//sample_floor.R")
+df_floor <- df_all %>% group_by(year) %>%
+    mutate(across(c(inc_earnings, inc_earnings_max, inc_earnings_max_raw), ~ floor_na(.x, weight))) %>%
+    ungroup()
+
+# Earnings sample for Figure 4: households above the household earnings floor.
 df_earn <- df_all %>% group_by(year) %>%
     mutate(inc_earnings = floor_na(inc_earnings, weight)) %>%
     ungroup() %>% filter(!is.na(inc_earnings))
 
 # Fig 5 From individual to HH inequality
-df_Fig_3_indHH <- df_earn %>% group_by(year) %>% 
+df_Fig_3_indHH <- df_floor %>% group_by(year) %>% 
     summarise(Var_earnings_max = weighted.var(log(inc_earnings_max, exp(1)), weight, na.rm = T),
               Var_earnings_HH = weighted.var(log(inc_earnings, exp(1)), weight, na.rm = T),
               Gini_earnings_max = Gini(inc_earnings_max, weight, na.rm = T),
@@ -65,7 +72,7 @@ ggsave("figures/Fig_3/Fig_3b_Gini_indHH.png", dpi = 600, width = 5, height = 3)
 # Robustness for the appendix: the same comparison with the main earner left on
 # the per-earner scale, which is how Figure 3a and 3b were drawn before the
 # equivalization was made consistent. Household stays per adult equivalent.
-df_Fig_3_indHH_raw <- df_earn %>% group_by(year) %>%
+df_Fig_3_indHH_raw <- df_floor %>% group_by(year) %>%
     summarise(Var_earnings_max = weighted.var(log(inc_earnings_max_raw, exp(1)), weight, na.rm = T),
               Var_earnings_HH = weighted.var(log(inc_earnings, exp(1)), weight, na.rm = T),
               Gini_earnings_max = Gini(inc_earnings_max_raw, weight, na.rm = T),
@@ -104,7 +111,7 @@ ggsave("figures/Fig_3/Fig_3h_Gini_indHH_raw.png", dpi = 600, width = 5, height =
 
 # single/married
 colors <- c("0" = "blue", "1" = "red")
-df_Fig_3_single <- df_earn %>% group_by(year, marriage) %>% 
+df_Fig_3_single <- df_floor %>% group_by(year, marriage) %>% 
     summarise(Var_earnings = weighted.var(log(inc_earnings, exp(1)), weight, na.rm = T)) %>%
     filter(!is.na(marriage))
 ggplot(df_Fig_3_single, aes(x = year, y = Var_earnings, colour = factor(marriage))) +
