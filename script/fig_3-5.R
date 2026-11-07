@@ -26,11 +26,6 @@ df_floor <- df_all %>% group_by(year) %>%
                     inc_earnings_main_raw, inc_earnings_spouse_raw), ~ floor_na(.x, weight))) %>%
     ungroup()
 
-# Earnings sample for Figure 4: households above the household earnings floor.
-df_earn <- df_all %>% group_by(year) %>%
-    mutate(inc_earnings = floor_na(inc_earnings, weight)) %>%
-    ungroup() %>% filter(!is.na(inc_earnings))
-
 # Fig 5 From individual to HH inequality
 df_Fig_3_indHH <- df_floor %>% group_by(year) %>% 
     summarise(Var_earnings_max = weighted.var(log(inc_earnings_max, exp(1)), weight, na.rm = T),
@@ -166,19 +161,21 @@ ggsave("figures/Fig_3/Fig_3f_correlation.png", dpi = 600, width = 5, height = 3)
 
 # Fig6 Private transfers and asset income
 colors <- c("HH Earnings" = "blue", "HH Earnings + Priv. Transf." = "red", "HH Earnings + Asset Income" = "green", "HH Earnings + Priv. Transf. + Asset Income" = "purple")
-# All four lines use the earnings sample, so they differ only by the income
-# component added. On all households, the asset-income line mixed in
-# households with no earnings and a few dollars of interest, and its variance
-# of logs reached about 4.
+# Each line is its own series with its own floor. The sums are formed from the
+# unfloored components, so a household with no earnings but some asset income
+# is in the asset-income line, and each sum is then floored on its own median.
+# Without a floor, households with no earnings and a few dollars of interest
+# pushed the asset-income line's variance of logs to about 4.
 # fill 0 for NA inc_earnings, inc_ptransfer, inc_investment
-df_Fig_4 <- df_earn %>% mutate(across(c(inc_earnings, inc_ptransfer, inc_investment), ~ ifelse(is.na(.), 0, .)))
+df_Fig_4 <- df_all %>% mutate(across(c(inc_earnings, inc_ptransfer, inc_investment), ~ ifelse(is.na(.), 0, .)))
 df_Fig_4 <- df_Fig_4 %>% mutate(inc_earnings_ptransfer = inc_earnings + inc_ptransfer,
                                 inc_earnings_investment = inc_earnings + inc_investment,
                                 inc_earnings_ptransfer_investment = inc_earnings + inc_ptransfer + inc_investment)
-# turn 0 to NA inc_earnings, inc_ptransfer, inc_investment, inc_earnings_ptransfer, inc_earnings_ptransfer_investment
-df_Fig_4 <- df_Fig_4 %>% mutate(across(c(inc_earnings, inc_ptransfer, inc_investment,
-                                          inc_earnings_ptransfer, inc_earnings_investment, inc_earnings_ptransfer_investment),
-                                       ~ ifelse(. == 0, NA, .)))
+# floor each of the four series; non-positive values become NA too
+df_Fig_4 <- df_Fig_4 %>% group_by(year) %>%
+    mutate(across(c(inc_earnings, inc_earnings_ptransfer, inc_earnings_investment, inc_earnings_ptransfer_investment),
+                  ~ floor_na(.x, weight))) %>%
+    ungroup()
 # calculate variance and Gini coefficient for each year
 df_Fig_4_inc <- df_Fig_4 %>% group_by(year) %>%
     summarise(Var_1 = weighted.var(log(inc_earnings, exp(1)), weight, na.rm = T),
@@ -197,7 +194,7 @@ ggplot(df_Fig_4_inc) +
     geom_line(aes(x = year, y = Var_4, colour = "HH Earnings + Priv. Transf. + Asset Income"), linewidth = 1) +
     labs(title = "Var. of Log Income", x = "Year", y = "Variance of Log") +
     # headroom for the legend; expand_limits widens the axis without dropping data
-    expand_limits(y = 0.65) +
+    expand_limits(y = 0.85) +
     scale_color_manual(
         guide = guide_legend(title = NULL),
         values = colors,
