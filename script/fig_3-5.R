@@ -262,6 +262,11 @@ df_all <- df_all %>% mutate(Pre_Govt = inc_total - inc_gtransfer,
 # turn 0 to NA inc_gtransfer, inc_total, exp_tax, Pre_Govt, Pre_Tax, Disposable
 df_all <- df_all %>% mutate(across(c(inc_gtransfer, inc_total, exp_tax, Pre_Govt, Pre_Tax, Disposable), 
                                    ~ ifelse(. <= 0, NA, .)))
+# each income concept keeps values of at least 5% of that year's median of
+# the same concept (script/sample_floor.R)
+df_all <- df_all %>% group_by(year) %>%
+    mutate(across(c(Pre_Govt, Pre_Tax, Disposable), ~ floor_na(.x, weight))) %>%
+    ungroup()
 # calculate variance and Gini coefficient for each year
 df_Fig_5_gov <- df_all %>% group_by(year) %>% 
     summarise(Var_1 = weighted.var(log(Pre_Govt, exp(1)), weight, na.rm = T),
