@@ -30,32 +30,32 @@
 
 In Taiwan, the evolution of economic inequality is often overshadowed by other topics in the field of economics.
 However, understanding the dynamics of inequality is crucial for comprehending the broader economic landscape. 
-Most studies on inequality in Taiwan have focused on income distribution and income gap, with less attention given to consumption inequality.
-For instance, Chang, Lin, and Lee (\citeyear{TW_classes_inc}) analyze the income distribution in Taiwan from 1990 to 2020, highlighting the increase in income and education inequality during this period.
-The authors apply the Age-Period-Cohort (APC) model to reveal that classes and education inequality primarily drive the increase in income inequality, and the generational gap between the baby boomers and millennials does not decrease over time. 
-At the same time, Chang (\citeyear{TW_party_inc_ineq}) focuses on the impact of government redistribution and political parties' actions.
-The author points out that the Democratic Progressive Party (DPP) share in the Legislative Yuan is negatively correlated with income inequality. However, a president from the DPP is negatively correlated with redistribution, which could worsen income inequality in the long run.
-Both studies use the Survey of Family Income and Expenditure (SFIE) as their primary data set. This repeated cross-sectional survey, started in 1978 and conducted yearly, provides detailed information on Taiwan's household income and expenditure patterns.
+Most studies on inequality in Taiwan have focused on the income distribution and income gaps, with less attention given to consumption inequality.
+For instance, Chang, Lin, and Lee (\citeyear{TW_classes_inc}) analyze personal income in Taiwan from 1990 to 2020.
+Applying an Age-Period-Cohort (APC) model, they find that income gaps by education and social class widened over this period, and that the gap between the baby boomers and millennials has not narrowed. 
+Chang (\citeyear{TW_party_inc_ineq}) focuses on how political parties shape government redistribution and income inequality.
+The author finds that the Democratic Progressive Party's (DPP) share of seats in the Legislative Yuan is negatively correlated with income inequality. However, a DPP president is negatively correlated with redistribution, which worsens income inequality in the long run.
+Both studies use the Survey of Family Income and Expenditure (SFIE) as their primary dataset. This repeated cross-sectional survey, started in 1978 and conducted yearly, provides detailed information on Taiwan's household income and expenditure patterns.
 
-Consumption inequality has been less frequently studied in Taiwan. Hong (\citeyear{TW_consumption_inequality}) uses the SFIE from 1980 to 2007 to analyze the evolution of consumption inequality in Taiwan, focusing on the Gini coefficient and the dynamics of consumption percentiles.
-The study finds that consumption inequality decreased after 1996 due to the redistribution effect of public health insurance in Taiwan and the growing elderly population in our demographic structure.
-However, the decrease in consumption inequality could be a double-edged sword since the other reason for the decline is the low consumption growth rate of wealthy families, which could lead to an economy that stagnates.
+Consumption inequality has been less frequently studied in Taiwan. Hong (\citeyear{TW_consumption_inequality}) uses the SFIE from 1980 to 2007 to analyze the evolution of consumption inequality in Taiwan, focusing on a decomposition of the Gini coefficient and on income and consumption growth by percentile.
+The study finds that consumption inequality decreased after 1996 mainly because rising medical and rent expenditures had an equalizing effect, and it links the rise of medical expenditure to population aging.
+However, the decrease in consumption inequality could be a double-edged sword, since another reason for the decline is the low consumption growth of wealthy families, which could lead to economic stagnation.
 
 One reason for the lack of attention to consumption in Taiwan and other countries is the difficulty in measuring consumption accurately.
 First, unlike income, which can be directly observed through tax records, consumption is often inferred from expenditure data that the government does not document.
-Therefore, most consumption data are often collected through surveys, which have a smaller sample size and are more prone to measurement errors and biases.
-Currently, the SFIE is the only survey that provides detailed information on household consumption in Taiwan, while The Consumer Expenditure Survey (CE) is the only one in the US (Attanasio \& Pistaferri, \citeyear{JEP_Consumption_Inequality}).
+Therefore, consumption data are mostly collected through surveys, which have smaller samples and are more prone to measurement error and bias.
+Currently, the SFIE is the only survey that provides detailed information on household consumption in Taiwan, while the Consumer Expenditure Survey (CE) is the only one in the US (Attanasio \& Pistaferri, \citeyear{JEP_Consumption_Inequality}).
 
 Second, the transformation from expenditure to consumption is not straightforward. Surveys like the SFIE typically report household expenditures, which may not accurately reflect households' actual consumption.
 For example, households may purchase goods in bulk or invest in durable goods, which can lead to discrepancies between expenditure and consumption. Most surveys lack information on the stock of durable goods and their current value.
-Another example is that consumption can be produced at home using time and goods, like childcare and home-cooked meals. Also, households may have different preferences for leisure and consumption, which can lead to differences in how they allocate their resources.
-The most challenging problem to overcome is the assumption that all households face the same prices for goods and services. This assumption violates the nature of durable goods such as housing and automobiles, which can have enormous price variations. Ignoring these differences can lead to an inaccurate representation of consumption patterns and inequality.
+Another example is that consumption can be produced at home from time and goods, such as childcare and home-cooked meals. Also, households may have different preferences for leisure and consumption, which can lead to differences in how they allocate their resources.
+The most challenging problem to overcome is the assumption that all households face the same prices for goods and services. This assumption violates the nature of durable goods such as housing and automobiles, whose prices vary enormously. Ignoring these differences can lead to an inaccurate representation of consumption patterns and inequality.
 
 This paper uses SFIE data to comprehensively analyze income and consumption inequality in Taiwan from 1981 to 2023 to fill in the missing pieces of inequality dynamics after 2008. This is interesting because economic growth in Taiwan has slowed since the 2008 financial crisis, and the COVID-19 pandemic has further exacerbated the situation.
 The income distribution between households was stable before 1994, and the Gini coefficient for individual earnings stabilized at around 0.30 due to many factors (Bourguignon, Fournier, \& Gurgand, \citeyear{TW_stable_dist}).
 However, the Gini coefficient for household earnings has increased since 1994, reaching 0.35 in 2023, as shown in the top right panel of Figure \ref{fig:Indi_to_HH}.
-This suggests that economic inequality will become a problem after economic growth slows down, even in a country with steady income distribution previously, like Taiwan.
-The paper is organized as follows: Section \ref{sec:data} describes the data used in the analysis, Section \ref{sec:household_inequality} presents the household-level inequality measures, including earnings, consumption, and their cyclical dynamics, and Section \ref{sec:conclusion} concludes the paper.
+This suggests that economic inequality will become a problem after economic growth slows down, even in a country such as Taiwan, whose income distribution was previously stable.
+The paper is organized as follows: Section \ref{sec:data} describes the data used in the analysis, Section \ref{sec:household_inequality} presents the household-level inequality measures, including earnings, consumption, and their cyclical dynamics, and Section \ref{sec:conclusion} concludes.
 
 \section{Data}
 \label{sec:data}
@@ -63,9 +63,9 @@ The paper is organized as follows: Section \ref{sec:data} describes the data use
 % \subsection{Survey of Family Income and Expenditure (SFIE)}
 \subsection{Survey of Family Income and Expenditure (SFIE)}
 
-The data used in this paper is the \citelink{DGBAS_SFIE}{SFIE} from 1981 to 2023, which is a repeated cross-sectional survey conducted annually since 1978 by the Directorate-General of Budget, Accounting and Statistics (\citeauthor{DGBAS_SFIE}) in Taiwan.
+The data used in this paper are the \citelink{DGBAS_SFIE}{SFIE} from 1981 to 2023, a repeated cross-sectional survey conducted annually since 1978 by the Directorate-General of Budget, Accounting and Statistics (\citeauthor{DGBAS_SFIE}) in Taiwan.
 The survey provides a rich dataset for analyzing income and expenditure patterns, including earnings, private transfers, asset income, government transfers, and consumption expenditures.
-The survey samples around 16,000 households each year; however, the NA rate of specific columns, such as labor earnings and industry earnings shown in Figure \ref{fig:missing} is increasing.
+The survey samples around 16,000 households each year. However, the share of missing values in some items, such as the labor earnings and industry earnings shown in Figure \ref{fig:missing}, is increasing.
 \begin{figure}
     \centering
     \begin{subfigure}[t]{0.475\textwidth}
@@ -79,16 +79,16 @@ The survey samples around 16,000 households each year; however, the NA rate of s
     \caption{Missing Rate of Labor Earnings and Industry Earnings in SFIE}
     \label{fig:missing}
 \end{figure}
-In the SFIE, both a true zero and a non-response are recorded as missing values, so the two cannot be seperated. 
+In the SFIE, both a true zero and a non-response are recorded as missing values, so the two cannot be separated. 
 Treating every missing value as zero would understate income and consumption levels at the bottom of the distribution.
-The gap at 2012 in Figure \ref{fig:missing} has a different cause: the SFIE data file for 2012 contains all the demographic information, but every income and expenditure value is missing.
+The gap in 2012 in Figure \ref{fig:missing} has a different cause: the SFIE data file for 2012 contains all the demographic information, but every income and expenditure value is missing.
 Section \ref{sec:sample} sets out how the analysis sample is built from these data.
 
-\subsection{CPI adjustment}
+\subsection{CPI Adjustment}
 
 The SFIE provides nominal values for income and expenditures, which need to be adjusted for inflation to obtain real values. 
 The price deflator used in this paper is the Consumer Price Index (\citelink{DGBAS_CPI}{CPI}) provided by the \citeauthor{DGBAS_CPI}.
-Figure \ref{fig:CPI} shows the CPI in Taiwan from 1981 to 2023 normalized to 100 in 2021.
+Figure \ref{fig:CPI} shows the CPI in Taiwan from 1981 to 2023, normalized to 100 in 2021.
 \begin{figure}
     \centering
     \includegraphics[width=0.45\textwidth]{figures/cpi.png}
@@ -100,7 +100,7 @@ Figure \ref{fig:CPI} shows the CPI in Taiwan from 1981 to 2023 normalized to 100
 
 To compare households of different sizes and compositions, I use the OECD equivalence scale to adjust household income and consumption to per-adult-equivalent levels. 
 The OECD scale assigns a weight of 1 to the first adult, 0.7 to each additional adult, and 0.5 to each child. 
-For the definition of child, I define a child as age 17 or younger, the original OECD definition is age 13 or younger. 
+I define a child as aged 17 or younger, while the original OECD definition is 13 or younger. 
 The main earner's earnings are also divided by the household's weight, which gives the household's equivalized earnings if the main earner were its only earner. 
 This places the main earner on the same scale as household earnings in Figure \ref{fig:Indi_to_HH}, so the gap reflects the earnings of other members rather than household size. 
 Spouses' earnings are left on a per-earner basis. They enter only the two-earner share, which is a count, and the between-spouse correlation, where dividing both spouses by the same weight would raise the correlation mechanically.
@@ -116,31 +116,31 @@ The sample is built in four steps, applied in this order.
     \item For measuring inequalities, households whose value falls below 5\% of that year's median are excluded. 
 \end{enumerate}
 
-Steps 3 and 4 are applied to one series of statistic at a time and are not carried into aggregates. 
+Steps 3 and 4 are applied to one series at a time and are not carried into aggregates. 
 Each aggregate is first summed from its components in step 2, before anything is excluded, steps 3 and 4 are then applied to the aggregate itself. 
-For example, a household with no earnings or earnings below the floor, is therefore left out of every statistic on household earnings. 
-But if it has asset income, it stays in the calculation of the total income, given that it passes the threshold. 
+For example, a household with no earnings or with earnings below the floor is left out of every statistic on household earnings. 
+If it has asset income, however, it stays in the statistics on total income, provided that its total income passes the threshold. 
 As a result, the statistics compared within one figure can cover different households.
 
 Step 4 is needed because the two main dispersion measures in this paper react very differently to values close to zero. 
-A household with a small positive earnings contributes a logarithm far below mean, which raises the variance of logs substantially. 
+A household with small positive earnings contributes a logarithm far below the mean, which raises the variance of logs substantially. 
 In contrast, the Gini coefficient is calculated from the Lorenz curve, so a few households with very low earnings have little effect on it.
-Such households are rare early in the sample, but become much more common after 2015, especially in the years of pandemic. 
-Without step 4, the variance of log household earnings more than triples between 1981 and 2023, from 0.29 to 0.97. With it, the variance only rises from 0.28 to 0.48. 
+Such households are rare early in the sample but become much more common after 2015, especially in the pandemic years. 
+Without step 4, the variance of log household earnings more than triples between 1981 and 2023, from 0.29 to 0.97. With it, the variance rises only from 0.28 to 0.48. 
 Appendix \ref{sec:appendix_sample} compares the sample of each series with and without the threshold.
 
-Excluding observations close to zero is common practice when dispersion is measured in logarithms. Heathcote, Perri, \& Violante (\citeyear{HEATHCOTE_2010}) exclude households with non-positive earnings and then the bottom 0.5\% of the remaining distribution, reapplying the trim to each definition of income, because the variance of logs is very sensitive to realizations close to zero. 
-Guvenen, Pistaferri, \& Violante (\citeyear{GRID_2022}) drop earnings below a threshold tied to the minimum wage, so that records of workers without a meaningful attachment to the labor force do not skew log-based statistics. 
+Excluding observations close to zero is common practice when dispersion is measured in logarithms. Heathcote, Perri, and Violante (\citeyear{HEATHCOTE_2010}) exclude households with non-positive earnings and then the bottom 0.5\% of the remaining distribution, reapplying the trim to each definition of income, because the variance of logs is very sensitive to realizations close to zero. 
+Guvenen, Pistaferri, and Violante (\citeyear{GRID_2022}) drop earnings below a threshold tied to the minimum wage, so that records of workers without a meaningful attachment to the labor force do not skew log-based statistics. 
 The Luxembourg Income Study bottom-coded incomes at 1\% of mean equivalized household income (Neugschwender, \citeyear{LIS_coding}). 
-In this paper, I trim samples that are under 5\% of the median, rather than trimming a fixed share of each year's sample. 
-The share of households near zero grows from about 0.1\% in the early 1980s to around 2\% in 2018, so a fixed share cannot remove them in every year. Trimming the bottom 0.5\% each year as Heathcote, Perri, \& Violante (\citeyear{HEATHCOTE_2010}) leaves the 2023 variance at 0.69, against 0.48 under the 5\% median threshold.
+In this paper, I drop observations below 5\% of the median rather than a fixed share of each year's sample. 
+The share of households near zero grows from about 0.1\% in the early 1980s to around 2\% in 2018, so a fixed share cannot remove them in every year. Trimming the bottom 0.5\% each year, as Heathcote, Perri, and Violante (\citeyear{HEATHCOTE_2010}) do, leaves the 2023 variance at 0.69, against 0.48 under the 5\% median threshold.
 
 \section{Household-level Inequality}
 \label{sec:household_inequality}
 
-Here, I present the household-level inequality measures, including earnings and consumption inequality, and their cyclical dynamics. This paper skips individual-level inequality, as it is more suitable to estimate using tax records. Individual-level consumption is not available in the SFIE, as it only recordes household-level non-durable consumption.
+Here, I present the household-level inequality measures, including earnings and consumption inequality, and their cyclical dynamics. This paper skips individual-level inequality, which is better estimated from tax records. Individual-level consumption is not available in the SFIE, as it only records household-level non-durable consumption.
 Estimating consumption inequality using household-level data is also more suitable, as households can share consumption goods and services, such as housing and food, which are not easily separable at the individual level.
-In this section, I will follow the structure of Heathcote, Perri, \& Violante (\citeyear{HEATHCOTE_2010}) to construct a complete picture of household-level inequality from basic earnings to disposable income and consumption. 
+In this section, I follow the structure of Heathcote, Perri, and Violante (\citeyear{HEATHCOTE_2010}) to construct a complete picture of household-level inequality from basic earnings to disposable income and consumption. 
 
 
 \subsection{Inequality in Earnings}
@@ -174,25 +174,25 @@ In this section, I will follow the structure of Heathcote, Perri, \& Violante (\
     \label{fig:earnings_inequality_cyclic}
 \end{figure}
 
-Figure \ref{fig:earnings_inequality} plots four measures of dispersion in household earnings: variance of log, Gini coefficient, P50-P10 ratio, and P90-P50 ratio.
+Figure \ref{fig:earnings_inequality} plots four measures of dispersion in household earnings: the variance of logs, the Gini coefficient, the P50-P10 ratio, and the P90-P50 ratio.
 Though all measures of dispersion have increased since 1981, there are some minor differences in their dynamics.
-The variance, the Gini coefficient, and the P50-P10 ratio track each other extremely closely. Both jump in 2001 after the Dot-com bubble, and spike again in 2009 after the Global Financial Crisis. Since 2001 they have moved within a narrow band, the variance sits between 0.43 and 0.50, while the P50-P10 ratio between 2.12 and 2.31.
+The variance, the Gini coefficient, and the P50-P10 ratio track each other extremely closely. All three jump in 2001 after the Dot-com bubble and spike again in 2009 after the Global Financial Crisis. Since 2001 they have moved within a narrow band, the variance between 0.43 and 0.50 and the P50-P10 ratio between 2.12 and 2.31.
 The Gini coefficient in the top right panel rises from 0.29 in 1981 to 0.35 in 2023, indicating that earnings inequality has risen over the past four decades. Almost all of that rise happens by 2001. After 2001, the Gini has stayed between 0.33 and 0.35.
 The P90-P50 ratio is the most interesting one. It also spikes around the Dot-com bubble, peaking at 2.21 in 2002, and then falls back to 2.07 by 2020, a stretch over which the top decile grew more slowly than the median. It climbs again to 2.14 by 2023, recovering half of that decline, so the compression at the top is at least partly an episode rather than a trend.
-It is worth noting that though the dispersion of earnings appears to rise steeply in Figure \ref{fig:earnings_inequality}, the rise is moderate in size. The Gini increases by only 0.06 between 1981 and 2023. The variance of logs increases by 0.16 between 1981 and 2006 and by 0.20 by 2023. Heathcote, Perri, \& Violante (\citeyear{HEATHCOTE_2010}) find that in the US the variance of log equivalized household earnings rises by roughly 0.30 from 1967 to the early 1990s, also about 25 years, and then levels off. Taiwan's variance therefore rises by about half of the US in 25 years. 
+It is worth noting that though the dispersion of earnings appears to rise steeply in Figure \ref{fig:earnings_inequality}, the rise is moderate in size. The Gini increases by only 0.06 between 1981 and 2023. The variance of logs increases by 0.16 between 1981 and 2006 and by 0.20 by 2023. Heathcote, Perri, and Violante (\citeyear{HEATHCOTE_2010}) find that in the US the variance of log equivalized household earnings rises by roughly 0.30 from 1967 to the early 1990s, also about 25 years, and then levels off. Over its first 25 years, Taiwan's variance therefore rises by about half as much as the US variance. 
 
 \subsection{Cyclical Dynamics of Earnings Inequality}
 
-Figure \ref{fig:earnings_inequality_cyclic} shows the trend in percentiles at different points in the distribution of household earnings from 1995 to 2023. The log earnings were normalized to 0 in 1995. Therefore, the y-axis shows the percentage change in earnings (as log points) relative to 1995.
-Here, I choose to show the result after and normalize it to 1995. The full results from 1981 to 2023 are in the appendix \ref{sec:appendix_cyclical_dynamics} where Figure \ref{fig:appendix_cyclic_earnings_1981} normalized to 1981 and \ref{fig:appendix_cyclic_earnings_1995} normalized to 1995. 
+Figure \ref{fig:earnings_inequality_cyclic} shows the trend in percentiles at different points in the distribution of household earnings from 1995 to 2023. Log earnings are normalized to 0 in 1995, so the y-axis shows the change in earnings relative to 1995 in log points.
+Here, I show only the years from 1995 onward. The full series from 1981 to 2023 are in Appendix \ref{sec:appendix_cyclical_dynamics}, normalized to 1981 in Figure \ref{fig:appendix_cyclic_earnings_1981} and to 1995 in Figure \ref{fig:appendix_cyclic_earnings_1995}. 
 The reason for this choice is that every percentile grew by between 79 and 102 log points from 1981 to 1995. That is, earnings at every point of the distribution more than doubled in fourteen years.
-This finding coincides with Bourguignon, Fournier, \& Gurgand (\citeyear{TW_stable_dist}) that before 1994, the income of Taiwanese households was in both a fast developing and stable environment.
+This finding is consistent with Bourguignon, Fournier, and Gurgand (\citeyear{TW_stable_dist}), who find that before 1994 Taiwan developed fast while its income distribution stayed stable.
 Therefore, putting years before 1995 in the main figure could dilute the interpretation of recent trends, as the rapid growth phase would dominate the visual impression. By focusing on the period after 1995, we can better highlight the cyclical and structural changes in earnings inequality that occurred after Taiwan's high-growth era ended. This approach allows for a more precise analysis of the dynamics relevant to the current policy and economic environment.
 
 We can see the fanning out of the earnings distribution over time: the lower the percentile, the less it grew. From 1995 to 2023 the bottom 5\% gained about 5 log points, against 18 for the median. P5 moves in a sequence of troughs, about 19 log points below its 1995 level in 2001 after the Dot-com bubble, and 25 below it in 2009 after the Global Financial Crisis. It then recovers steadily to 9 log points above its 1995 level in 2020, falls by 12 log points in 2021, during the COVID-19 pandemic, and is back at 5 above it in 2023. The pandemic decline at the bottom is therefore smaller and shorter-lived than the two before it.
-In contrast, growth across the top half of the distribution is tightly bunched. The median gained about 18 log points since 1995, the 90th percentile 24 and the 95th 25. The divergence in Figure \ref{fig:earnings_inequality} is therefore between the top half and the bottom half, not within the top half.
+In contrast, growth across the top half of the distribution is tightly bunched. The median has gained about 18 log points since 1995, the 90th percentile 24 and the 95th 25. The divergence in Figure \ref{fig:earnings_inequality} is therefore between the top half and the bottom half, not within the top half.
 
-Inequality tends to widen during recessions, such as after the Dot-com bubble in 2001, the Global Financial Crisis in 2008 and 2009, and during the COVID-19 pandemic in 2021 and 2022. The reason behind this phenomenon is that when facing external shocks, households with higher earnings are more likely to have diversified income sources, such as investments and insurance transfers, which can help them absorbed shocks better than those with lower earnings who rely more on labor income. We can also observe this phenomenon in the percentiles of earnings distribution, where the lower percentiles tend to decline sharply while the upper percentiles remain relatively stable during recessions.
+Inequality tends to widen during recessions, such as after the Dot-com bubble in 2001, the Global Financial Crisis in 2008 and 2009, and during the COVID-19 pandemic in 2021 and 2022. The reason behind this phenomenon is that when facing external shocks, households with higher earnings are more likely to have diversified income sources, such as investments and insurance transfers, which can help them absorb shocks better than those with lower earnings who rely more on labor income. We can also observe this phenomenon in the percentiles of earnings distribution, where the lower percentiles tend to decline sharply while the upper percentiles remain relatively stable during recessions.
 
 \subsection{From Individual to Household Inequality}
 
@@ -228,15 +228,15 @@ Inequality tends to widen during recessions, such as after the Dot-com bubble in
 
 Next, we look at the role of the family in household earnings inequality. The top two panels of Figure \ref{fig:Indi_to_HH} compare the main earner with the household. Both series are measured per adult equivalent, so the two share a common scale. 
 The Gini coefficient behaves as income pooling predicts: household earnings are less unequal than the main earner's, indicating that resources are shared within the family. 
-The variance of log earnings tells a weaker story. Household variance lies below the main earner's until 1993. However, from 1994 the two overlapping with each other, with the household above in 25 of the 29 years. Heathcote, Perri, \& Violante (\citeyear{HEATHCOTE_2010}) find the same pattern for the US, where the two variances are strikingly similar while the two Gini coefficients differ. 
-They attribute it to households at the bottom of the earnings distribution are either single or married with only one earner, so that pooling does little in the lower tail, which is where the variance of logs puts most of its weight. The same explanation is plausible for Taiwan, given the falling shares of married and two-earner households in the panels below. 
+The variance of log earnings tells a weaker story. Household variance lies below the main earner's until 1993. From 1994, however, the two overlap, with the household above in 25 of the 29 years. Heathcote, Perri, and Violante (\citeyear{HEATHCOTE_2010}) find the same pattern for the US, where the two variances are strikingly similar while the two Gini coefficients differ. 
+They attribute this to households at the bottom of the earnings distribution being either single or married with only one earner, so that pooling does little in the lower tail, which is where the variance of logs puts most of its weight. The same explanation is plausible for Taiwan, given the falling shares of married and two-earner households in the panels below. 
 
 Appendix Figure \ref{fig:appendix_indHH_raw} repeats the comparison with the main earner left on a per-earner scale, as an unequivalized individual series would be plotted. On that scale the household lies above the main earner in 41 of 42 years for the variance and in every year for the Gini, so the ordering is sensitive to the choice of scale. 
 
-Turning to household structure, the bottom left panel of Figure \ref{fig:Indi_to_HH} shows that the ratio of two-earner households has been decreasing in our data set, which is not usually the case. The decline in two-earner households we observe can be due to higher-income couples tending to split up their household ID, which can avoid some housing and land tax. The middle two panels of Figure \ref{fig:Indi_to_HH} show the relation between single and married households. Earnings are more dispersed among single households than among married ones in most years, as pooling within couples would predict. But the gap narrows from 0.06 in 1988 to below 0.03 since 2013, and reverses in 2020 and 2023. The narrowing coincides with the decreasing fraction of married households. 
+Turning to household structure, the bottom left panel of Figure \ref{fig:Indi_to_HH} shows that the share of two-earner households has been decreasing in our dataset, which is not usually the case. The decline we observe could be due to higher-income couples splitting their household registration, which can reduce housing and land taxes. The middle two panels of Figure \ref{fig:Indi_to_HH} show the relation between single and married households. Earnings are more dispersed among single households than among married ones in most years, as pooling within couples would predict. But the gap narrows from 0.06 in 1988 to below 0.03 from 2013 onward, and reverses in 2020 and 2023. The narrowing coincides with the decreasing fraction of married households. 
 
-The bottom right panel shows the between-spouse earnings correlation among two-earner cohabiting households. Increasing assortative matching would lead one to expect this correlation to rise over time, as couples increasingly share educational background and earnings potential. It does rise, from 0.34 in 1988 to 0.49 in 2009, but then falls back, staying between 0.39 and 0.45 since 2010 and ending at 0.39 in 2023. 
-One possible explanation for the reversal is the change in household structure discussed above. If higher-income couples separate their household registration, they leave the two-earner sample and drop out of this calculation entirely. Testing that would require linkage across years, which the SFIE does not, so the question is left open.
+The bottom right panel shows the between-spouse earnings correlation among two-earner cohabiting households. Increasing assortative matching would lead one to expect this correlation to rise over time, as couples increasingly share educational background and earnings potential. It does rise, from 0.34 in 1988 to 0.49 in 2009, but then falls back, ending at 0.39 in 2023. 
+One possible explanation for the reversal is the change in household structure discussed above. If higher-income couples separate their household registration, they leave the two-earner sample and drop out of this calculation entirely. Testing that would require linkage across years, which the SFIE does not provide, so the question is left open.
 
 \subsection{Private Transfers and Asset Income}
 
@@ -262,10 +262,10 @@ One possible explanation for the reversal is the change in household structure d
     \label{fig:Trans_Asset}
 \end{figure}
 
-In Figure \ref{fig:Trans_Asset}, we discuss other income sources beyond basic earnings, including investment in assets and private transfers. Each line covers households whose value of aggreagted item passes the threshold in section \ref{sec:sample}, so the lines that add asset income or private transfers also include households without earnings. 
+In Figure \ref{fig:Trans_Asset}, we discuss income sources beyond earnings, including asset income and private transfers. Each line covers the households whose value of that aggregate passes the threshold in Section \ref{sec:sample}, so the lines that add asset income or private transfers also include households without earnings. 
 
-Asset income increases inequality while private transfers reduce it. Adding asset income raises the Gini coefficient and the variance of logs in every year. Among households in the earnings sample alone, adding asset income raises the Gini by only 0.002 to 0.008. Thus, most of the increase in the measures comes from households without earnings entering the sample. Adding private transfers to earnings plus asset income lowers both measures in every year. For transfers to lower inequality in this way, they must make up a larger share of income for households with low earnings than for those with high earnings.
-This pattern aligns with the assumption that beyond the household, the family or clan can smooth out income shocks using private transfers. 
+Asset income increases inequality while private transfers reduce it. Adding asset income raises the Gini coefficient and the variance of logs in every year. Among households in the earnings sample alone, adding asset income raises the Gini by only 0.002 to 0.008. Thus, from 1992 onward, most of the increase in the measures comes from households without earnings entering the sample. Adding private transfers to earnings plus asset income lowers both measures in every year. For transfers to lower inequality in this way, they must make up a larger share of income for households with low earnings than for those with high earnings.
+This pattern is consistent with the idea that beyond the household, the family or clan can smooth out income shocks using private transfers. 
 
 The two components are also nearly unrelated. Among households with either a private transfer or asset income, the correlation between the two amounts lies between $-0.02$ and $0.07$ in every year (Appendix Figure \ref{fig:appendix_corr}), so larger transfers do not go systematically to households with more asset income.
 
@@ -345,21 +345,21 @@ The two components are also nearly unrelated. Among households with either a pri
 
 \subsection{Government Redistribution}
 
-We move on to government redistribution in Figure \ref{fig:Gov}. Redistribution plays a significant role in reducing income inequality. We can see that although both subsidy and taxation reduce inequality, welfare systems such as public health insurance and labor insurance have a more substantial redistribution effect. The benefits reduce the Gini coefficient by about 3 points in recent years, and tax further reduces it by 0.6 points, resulting in a much smoother trend.
+We move on to government redistribution in Figure \ref{fig:Gov}. Redistribution plays a significant role in reducing income inequality. We can see that although both benefits and taxes reduce inequality, welfare systems such as public health insurance and labor insurance have a more substantial redistribution effect. The benefits reduce the Gini coefficient by about 3 points in recent years, and tax further reduces it by 0.6 points, resulting in a much smoother trend.
 
-Compared to the increased variance and Gini coefficient of Pre-Government income, redistribution successfully stabilized the income inequality, making the Gini coefficient stable around 0.29. However, the government did not smooth out the drastic increase of inequalities during recessions like the Dot-com bubble in 2000 and the Global Financial Crisis in 2008. Surprisingly, COVID-19 after 2020 did not increase inequalities significantly; this can be due to the government's subsidy and expenditure, which successfully stabilized the disparity at the time.
+Compared with the rising variance and Gini coefficient of pre-government income, redistribution successfully stabilized income inequality, making the Gini coefficient stable around 0.29. However, the government did not smooth out the sharp increases in inequality during recessions such as the Dot-com bubble in 2000 and the Global Financial Crisis in 2008. Surprisingly, COVID-19 did not increase inequality significantly after 2020. This may be due to government subsidies and spending, which stabilized the disparity at the time.
 
 \subsection{From Income to Consumption Inequality}
 
-The rest of this section discusses consumptions and expenditures. Figure \ref{fig:Consumption} shows the same four measurements as Figure \ref{fig:earnings_inequality} for disposable income and consumption. The result highlights the effect of consumption smoothing. Since households can borrow and save to maintain consumption when facing income shocks, consumption inequality is smaller than income.
+The rest of this section discusses consumption and expenditure. Figure \ref{fig:Consumption} shows the same four measures as Figure \ref{fig:earnings_inequality} for disposable income and consumption. The result highlights the effect of consumption smoothing. Since households can borrow and save to maintain consumption when facing income shocks, consumption inequality is smaller than income inequality.
 
-Surprisingly, compared to the US, where consumption inequality increased, consumption discrepancies in Taiwan decreased steadily after 1995. One of the reasons could be the low consumption growth rate of wealthy families, as shown in figure \ref{fig:Consumption_cyclic}. The full series from 1981 are in Appendix Figures \ref{fig:appendix_cyclic_consumption_1981} and \ref{fig:appendix_cyclic_consumption_1995}, normalized to 1981 and 1995 respectively. The consumption expenditures of the top 5\% families grew about 15 log points between 1995 and 2023, compared to 39 log points in the lowest 25\%. 
+Surprisingly, compared with the US, where consumption inequality increased (Attanasio \& Pistaferri, \citeyear{JEP_Consumption_Inequality}), consumption discrepancies in Taiwan decreased steadily after 1995. One of the reasons could be the low consumption growth rate of wealthy families, as shown in Figure \ref{fig:Consumption_cyclic}. The full series from 1981 are in Appendix Figures \ref{fig:appendix_cyclic_consumption_1981} and \ref{fig:appendix_cyclic_consumption_1995}, normalized to 1981 and 1995 respectively. The consumption expenditures of the top 5\% of families grew by about 15 log points between 1995 and 2023, compared with 39 log points for the lowest 25\%. 
 
-These consumption phenomena could negatively impact Taiwan's economy, as Hong (\citeyear{TW_consumption_inequality}) suggests, since wealthy families do not increase their consumption and lower-income families face higher housing and health insurance burdens. Eventually, this could leads to a stagnation of Taiwan's economy.
+These consumption phenomena could negatively impact Taiwan's economy, as Hong (\citeyear{TW_consumption_inequality}) suggests, since wealthy families do not increase their consumption and lower-income families face higher housing and medical costs. Eventually, this could lead to a stagnation of Taiwan's economy.
 
 \subsection{Food Consumption and Housing Services}
 
-The final Figure \ref{fig:Food_Housing} highlights the inequalities in food and housing consumption in Taiwan. The Gini coefficients and variances presented in the figure indicate that the food expenditure discrepancies remain relatively small, and housing consumption inequality is steadily decreasing.
+Finally, Figure \ref{fig:Food_Housing} shows inequality in food and housing consumption in Taiwan. The Gini coefficients and variances presented in the figure indicate that the food expenditure discrepancies remain relatively small, and housing consumption inequality is steadily decreasing.
 
 The decrease in food consumption inequality after 2010 is not explained here. A definition change in the survey is worth ruling out. For example, the food aggregate is built from different item codes before and after the 1999 survey redesign, though that redesign predates the decline by a decade. This is left for future work.
 
@@ -375,7 +375,7 @@ Government redistribution through welfare programs and taxation has helped stabi
 
 Perhaps most intriguingly, the paper documents a declining trend in consumption inequality, driven partly by the low consumption growth of wealthy households and potentially concerning stagnation among higher-income groups. This divergence between income and consumption dynamics underscores the complexity of economic inequality and calls for more policy responses.
 
-While Taiwan's earnings inequality has risen less than the United States, shifts in family composition, consumption behavior, and income distribution point to growing vulnerabilities. Further work should investigate the causes behind these demographic, institutional changes and evaluate policies that could promote inclusive growth in an era of slower economic expansion.
+While Taiwan's earnings inequality has risen by less than in the United States, shifts in family composition, consumption behavior, and income distribution point to growing vulnerabilities. Further work should investigate the causes behind these demographic and institutional changes and evaluate policies that could promote inclusive growth in an era of slower economic expansion.
 
 \clearpage
 
@@ -384,7 +384,7 @@ While Taiwan's earnings inequality has risen less than the United States, shifts
 \newpage
 % Appendices
 \begin{appendices}
-\section{Extra Figure for Cyclical Dynamics}
+\section{Extra Figures for Cyclical Dynamics}
 \label{sec:appendix_cyclical_dynamics}
 
 \vspace{2em}
@@ -435,7 +435,7 @@ While Taiwan's earnings inequality has risen less than the United States, shifts
 \section{The Floor at 5\% of the Median}
 \label{sec:appendix_sample}
 
-Figure \ref{fig:appendix_sample} compares household earnings inequality on all households with positive earnings and on the earnings sample of Section \ref{sec:sample}. The two variance series stay within 0.1 of each other until 2015 and then separate. On all positive earners, the variance jumps to 0.96 in 2018 and 1.12 in 2022, while on the earnings sample it stays between 0.43 and 0.50. The two Gini series differ by at most 0.004 before 2016 and at most 0.014 after, which is not a huge difference compared to the differences in the variance.
+Figure \ref{fig:appendix_sample} compares household earnings inequality on all households with positive earnings and on the earnings sample of Section \ref{sec:sample}. The two variance series stay within 0.1 of each other until 2015 and then separate. On all positive earners, the variance jumps to 0.96 in 2018 and 1.12 in 2022, while on the earnings sample it stays between 0.43 and 0.50. The two Gini series differ by at most 0.004 before 2016 and at most 0.014 after, which is small compared with the difference in the variance.
 
 % The lognormal distribution gives a way to check which pair of numbers is consistent. Under lognormality a Gini coefficient of $G$ implies a variance of logs of $2\left[\Phi^{-1}\left((1+G)/2\right)\right]^2$, where $\Phi$ is the standard normal distribution function. In 2023 the Gini of 0.362 on all positive earners implies a variance of 0.44, against a measured 0.97. On the earnings sample the Gini of 0.349 implies 0.41, against a measured 0.48.
 
@@ -493,7 +493,7 @@ Table \ref{tab:appendix_floor} repeats the comparison for every series. The floo
 \section{Private Transfers and Asset Income}
 \label{sec:appendix_corr}
 
-Figure \ref{fig:appendix_corr} plots the correlation between equivalized private transfers and equivalized asset income among households that receive either. It is computed from the levels without trim and it covers every household that receives either. The correlation lies between $-0.02$ and $0.07$, so the size of a household's private transfers is almost unrelated to the size of its asset income.
+Figure \ref{fig:appendix_corr} plots the correlation between equivalized private transfers and equivalized asset income among households that receive either. It is computed from levels, without the floor, and covers every household that receives either. The correlation lies between $-0.02$ and $0.07$, so the size of a household's private transfers is almost unrelated to the size of its asset income.
 
 \begin{figure}[ht]
     \centering
