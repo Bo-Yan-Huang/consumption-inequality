@@ -394,12 +394,9 @@ While Taiwan's earnings inequality has risen less than the United States, shifts
     \includegraphics[width=0.88\textwidth]{figures/Fig_2/Fig_2_percentiles_1981.png}
     \caption{Percentiles of the Household Earnings Distribution, 1981 - 2023, Normalized to 1981}
     \label{fig:appendix_cyclic_earnings_1981}
-\end{figure}
 
-\vspace{4em} 
+    \vspace{2em} 
 
-\begin{figure}[ht]
-    \centering
     \includegraphics[width=0.88\textwidth]{figures/Fig_2/Fig_2_percentiles_1995.png}
     \caption{Percentiles of the Household Earnings Distribution, 1981 - 2023, Normalized to 1995}
     \label{fig:appendix_cyclic_earnings_1995}
@@ -410,9 +407,18 @@ While Taiwan's earnings inequality has risen less than the United States, shifts
     \includegraphics[width=0.88\textwidth]{figures/Fig_7/Fig_7_percentiles_1981.png}
     \caption{Percentiles of the Household Consumption Distribution, 1981 - 2023, Normalized to 1981}
     \label{fig:appendix_cyclic_consumption_1981}
+
+    \vspace{2em} 
+
+    \centering
+    \includegraphics[width=0.88\textwidth]{figures/Fig_7/Fig_7_percentiles_1995.png}
+    \caption{Percentiles of the Household Consumption Distribution, 1981 - 2023, Normalized to 1995}
+    \label{fig:appendix_cyclic_consumption_1995}
 \end{figure}
 
-\begin{figure}[ht]
+\clearpage
+
+\begin{figure}[t]
     \centering
     \begin{subfigure}[t]{0.495\textwidth}
         \centering
@@ -426,22 +432,14 @@ While Taiwan's earnings inequality has risen less than the United States, shifts
     \label{fig:appendix_indHH_raw}
 \end{figure}
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.88\textwidth]{figures/Fig_7/Fig_7_percentiles_1995.png}
-    \caption{Percentiles of the Household Consumption Distribution, 1981 - 2023, Normalized to 1995}
-    \label{fig:appendix_cyclic_consumption_1995}
-\end{figure}
-
-\clearpage
 \section{The Floor at 5\% of the Median}
 \label{sec:appendix_sample}
 
-Figure \ref{fig:appendix_sample} compares household earnings inequality on all households with positive earnings and on the earnings sample of Section \ref{sec:sample}. The two variance series stay within 0.1 of each other until 2015 and then separate. On all positive earners the variance jumps to 0.96 in 2018 and 1.12 in 2022, while on the earnings sample it stays between 0.43 and 0.50. The two Gini series differ by at most 0.004 before 2016 and at most 0.014 after.
+Figure \ref{fig:appendix_sample} compares household earnings inequality on all households with positive earnings and on the earnings sample of Section \ref{sec:sample}. The two variance series stay within 0.1 of each other until 2015 and then separate. On all positive earners, the variance jumps to 0.96 in 2018 and 1.12 in 2022, while on the earnings sample it stays between 0.43 and 0.50. The two Gini series differ by at most 0.004 before 2016 and at most 0.014 after, which is not a huge difference compared to the differences in the variance.
 
-The lognormal distribution gives a way to check which pair of numbers is consistent. Under lognormality a Gini coefficient of $G$ implies a variance of logs of $2\left[\Phi^{-1}\left((1+G)/2\right)\right]^2$, where $\Phi$ is the standard normal distribution function. In 2023 the Gini of 0.362 on all positive earners implies a variance of 0.44, against a measured 0.97. On the earnings sample the Gini of 0.349 implies 0.41, against a measured 0.48.
+% The lognormal distribution gives a way to check which pair of numbers is consistent. Under lognormality a Gini coefficient of $G$ implies a variance of logs of $2\left[\Phi^{-1}\left((1+G)/2\right)\right]^2$, where $\Phi$ is the standard normal distribution function. In 2023 the Gini of 0.362 on all positive earners implies a variance of 0.44, against a measured 0.97. On the earnings sample the Gini of 0.349 implies 0.41, against a measured 0.48.
 
-\begin{figure}[ht]
+\begin{figure}[!h]
     \centering
     \begin{subfigure}[t]{0.495\textwidth}
         \centering
@@ -455,7 +453,7 @@ The lognormal distribution gives a way to check which pair of numbers is consist
     \label{fig:appendix_sample}
 \end{figure}
 
-Table \ref{tab:appendix_floor} repeats the comparison for every series. The floor matters most where many values sit close to zero. For the individual earnings series it lowers the 2023 variance of logs from between 0.80 and 1.22 to between 0.42 and 0.47. For earnings plus asset income, households without earnings and with little asset income push the 2023 variance to 3.61 without the floor, against 0.72 with it. For pre-tax and disposable income, consumption, food and housing, the floor removes at most 0.08\% of households in any year and changes the variance of logs by less than 0.01 and the Gini by less than 0.001.
+Table \ref{tab:appendix_floor} repeats the comparison for every series. The floor matters most where many values sit close to zero. For the individual earnings series it lowers the 2023 variance of logs from between 0.80 and 1.22 to between 0.42 and 0.47. For earnings plus asset income, households without earnings and with little asset income push the 2023 variance to 3.61 without the threshold, against 0.72 with it. For pre-tax and disposable income, consumption, food and housing, the floor removes at most 0.08\% of households in any year and changes the variance of logs by less than 0.01 and the Gini by less than 0.001.
 
 \begin{table}[ht]
     \centering
@@ -485,18 +483,17 @@ Table \ref{tab:appendix_floor} repeats the comparison for every series. The floo
         \bottomrule
     \end{tabular}
 
-    \medskip
-    \begin{minipage}{0.95\textwidth}
-        \footnotesize
-        \textit{Notes:} Share removed is the share of households with a positive value of the series that fall below 5\% of that year's weighted median of the same series, over all years and in the year where it is largest. Largest reduction is the largest fall in the variance of logs or the Gini coefficient in any single year when the floor is applied. The main earner is the household member with the highest earnings. The household head and spouse series are those used for the two-earner share and the between-spouse correlation; the spouse series starts in 1988.
-    \end{minipage}
+    % \medskip
+    % \begin{minipage}{0.95\textwidth}
+    %     \footnotesize
+    %     \textit{Notes:} Share removed is the share of households with a positive value of the series that fall below 5\% of that year's weighted median of the same series, over all years and in the year where it is largest. Largest reduction is the largest fall in the variance of logs or the Gini coefficient in any single year when the floor is applied. The main earner is the household member with the highest earnings. The household head and spouse series are those used for the two-earner share and the between-spouse correlation; the spouse series starts in 1988.
+    % \end{minipage}
 \end{table}
 
-\clearpage
 \section{Private Transfers and Asset Income}
 \label{sec:appendix_corr}
 
-Figure \ref{fig:appendix_corr} plots, for each year, the Pearson correlation between equivalized private transfers and equivalized asset income among households that receive either. It is computed from the levels of the two components rather than their logarithms, so no floor is applied, and it covers every household that receives either. The correlation lies between $-0.02$ (1981) and $0.07$ (2000) and is close to zero throughout, so the size of a household's private transfers is almost unrelated to the size of its asset income.
+Figure \ref{fig:appendix_corr} plots the correlation between equivalized private transfers and equivalized asset income among households that receive either. It is computed from the levels without trim and it covers every household that receives either. The correlation lies between $-0.02$ and $0.07$, so the size of a household's private transfers is almost unrelated to the size of its asset income.
 
 \begin{figure}[ht]
     \centering
