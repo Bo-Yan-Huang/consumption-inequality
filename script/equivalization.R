@@ -53,12 +53,13 @@ for(y in years){
 
     # income
     # inc_earnings itm190+itm240, inc_investment itm330, inc_transfer itm410, inc_total itm400
-    # Individual earnings are kept in two forms. The _raw columns are per earner,
-    # as the survey reports them. The plain columns are per adult equivalent, so
-    # they sit on the same scale as inc_earnings and can share an axis with it.
+    # Individual earnings: the _raw columns are per earner, as the survey reports
+    # them. The main earner is also kept per adult equivalent (inc_earnings_max),
+    # on the same scale as inc_earnings, so the two can share an axis. The head
+    # and the spouse are kept per earner only: no figure compares them with a
+    # household series.
     inc_y <- inc_y %>% mutate(inc_earnings = (itm190 + itm240) / eqi_w,
                               inc_earnings_main_raw = itm191 + itm241,
-                              inc_earnings_main = inc_earnings_main_raw / eqi_w,
                               inc_investment = itm330 / eqi_w,
                               inc_gtransfer = itm430 / eqi_w,
                               # Private transfers are all transfers less those from the government.
@@ -97,7 +98,6 @@ for(y in years){
                                                             spouse_id == 8 ~ itm198 + itm248,
                                                             TRUE ~ NA))
     }
-    inc_y <- inc_y %>% mutate(inc_earnings_spouse = inc_earnings_spouse_raw / eqi_w)
 
     # fill 0 for NA in itm590, itm610, itm620, itm710, itm730
     if(y < 98){
@@ -151,7 +151,7 @@ for(y in years){
     }
 
     inc_y$year <- 1911 + y
-    inc_y <- inc_y %>% select(year, id, weight, eqi_w, marriage, spouse_id, inc_earnings, inc_earnings_max, inc_earnings_main, inc_earnings_spouse, inc_earnings_max_raw, inc_earnings_main_raw, inc_earnings_spouse_raw, inc_investment, inc_gtransfer, inc_ptransfer, inc_total, exp_interest, exp_tax, exp_transfer, exp_consumption, exp_food, exp_housing)
+    inc_y <- inc_y %>% select(year, id, weight, eqi_w, marriage, spouse_id, inc_earnings, inc_earnings_max, inc_earnings_max_raw, inc_earnings_main_raw, inc_earnings_spouse_raw, inc_investment, inc_gtransfer, inc_ptransfer, inc_total, exp_interest, exp_tax, exp_transfer, exp_consumption, exp_food, exp_housing)
 
     cpi_y <- as.numeric(cpi[y - 70 + 1, 2])
     inc_y <- inc_y %>% mutate(across(starts_with('inc_'), ~ . / cpi_y * 100))
