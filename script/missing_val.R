@@ -6,6 +6,7 @@
 library(tidyverse)
 library(haven)
 library(ggplot2)
+source("script//plot_style.R")
 
 years <- c(70:112)
 
@@ -37,12 +38,12 @@ df <- df %>% mutate(itm190_na_ratio = ifelse(year == 2012, NA, itm190_na_ratio),
                     itm240_na_ratio = ifelse(year == 2012, NA, itm240_na_ratio))
 
 ggplot(df, aes(x = year, y = itm190_na_ratio)) +
-    geom_line(color = "blue") +
+    geom_line(color = pal_1) +
     labs(title = "Missing Value Ratio of Labor Earnings", x = "Year", y = "Ratio") +
     theme(plot.title = element_text(hjust = 0.5))
 ggsave("figures/missing/itm190.png", dpi = 600, width = 5, height = 3)
 ggplot(df, aes(x = year, y = itm240_na_ratio)) +
-    geom_line(color = "blue") +
+    geom_line(color = pal_1) +
     labs(title = "Missing Value Ratio of Industry Earnings", x = "Year", y = "Ratio") +
     theme(plot.title = element_text(hjust = 0.5))
 ggsave("figures/missing/itm240.png", dpi = 600, width = 5, height = 3)

@@ -6,6 +6,7 @@
 library(tidyverse)
 library(DescTools)
 library(modi)
+source("script//plot_style.R")
 
 # read the cross sectional all file
 df_all <- read.csv("HH_inc_exp//HH_all.csv") %>% as_tibble()
@@ -31,22 +32,22 @@ df_Fig_1_wage <- df_earn %>% group_by(year) %>%
               P90_P50 = weighted.quantile(inc_earnings, weight, prob = 0.9) / weighted.quantile(inc_earnings, weight, prob = 0.5))
 # plot
 ggplot(df_Fig_1_wage, aes(x = year, y = Var_wage)) +
-    geom_line(colour = "blue", linewidth = 1) +
+    geom_line(colour = pal_1, linewidth = 1) +
     labs(title = "Variance of Log Equiv. HH Earnings", x = "Year", y = "Variance of Log") +
     theme(plot.title = element_text(hjust = 0.5))
 ggsave("figures/Fig_1/Fig_1a_Var_Earnings.png", dpi = 600, width = 4, height = 4)
 ggplot(df_Fig_1_wage, aes(x = year, y = Gini_wage)) +
-    geom_line(colour = "blue", linewidth = 1) +
+    geom_line(colour = pal_1, linewidth = 1) +
     labs(title = "Gini Coefficient of Equiv. HH Earnings", x = "Year", y = "Gini Coefficient") +
     theme(plot.title = element_text(hjust = 0.5))
 ggsave("figures/Fig_1/Fig_1b_Gini_Earnings.png", dpi = 600, width = 4, height = 4)
 ggplot(df_Fig_1_wage, aes(x = year, y = P50_P10)) +
-    geom_line(colour = "blue", linewidth = 1) +
+    geom_line(colour = pal_1, linewidth = 1) +
     labs(title = "P50-P10 Ratio of Equiv. HH Earnings", x = "Year", y = "Ratio") +
     theme(plot.title = element_text(hjust = 0.5))
 ggsave("figures/Fig_1/Fig_1c_P50_P10_Earnings.png", dpi = 600, width = 4, height = 4)
 ggplot(df_Fig_1_wage, aes(x = year, y = P90_P50)) +
-    geom_line(colour = "blue", linewidth = 1) +
+    geom_line(colour = pal_1, linewidth = 1) +
     labs(title = "P90-P50 Ratio of Equiv. HH Earnings", x = "Year", y = "Ratio") +
     theme(plot.title = element_text(hjust = 0.5))
 ggsave("figures/Fig_1/Fig_1d_P90_P50_Earnings.png", dpi = 600, width = 4, height = 4)
@@ -78,8 +79,7 @@ df_Fig_2_wage <- df_Fig_2_wage %>%
            n_log_P90 = log_P90 - base_1981$log_P90,
            n_log_P95 = log_P95 - base_1981$log_P95)
 # plot
-colors <- c("P5" = "blue", "P10" = "green", "P25" = "red", "P50" = "cyan", 
-            "P75" = "purple", "P90" = "yellow", "P95" = "black")
+colors <- pal_pct
 ggplot(df_Fig_2_wage) +
     geom_line(aes(x = year, y = n_log_P5, colour = "P5"), linewidth = 1) +
     geom_line(aes(x = year, y = n_log_P10, colour = "P10"), linewidth = 1) +
@@ -164,7 +164,7 @@ df_Fig_1_trim <- bind_rows(
     group_by(year, sample) %>%
     summarise(Var_wage = weighted.var(log(inc_earnings, exp(1)), weight, na.rm = T),
               Gini_wage = Gini(inc_earnings, weight, na.rm = T), .groups = "drop")
-colors <- c("all" = "red", "earn" = "blue")
+colors <- c("all" = pal_2, "earn" = pal_1)
 ggplot(df_Fig_1_trim, aes(x = year, y = Var_wage, colour = sample)) +
     geom_line(linewidth = 1) +
     labs(title = "Variance of Log Equiv. HH Earnings", x = "Year", y = "Variance of Log") +
