@@ -6,6 +6,7 @@
 library(tidyverse)
 library(DescTools)
 library(modi)
+source("script//plot_style.R")
 
 # read the cross sectional all file
 df_all <- read.csv("HH_inc_exp//HH_all.csv") %>% as_tibble()
@@ -33,7 +34,7 @@ df_Fig_3_indHH <- df_floor %>% group_by(year) %>%
               Gini_earnings_max = Gini(inc_earnings_max, weight, na.rm = T),
               Gini_earnings_HH = Gini(inc_earnings, weight, na.rm = T))
 # plot
-colors <- c("Main Earner" = "blue", "Household" = "red")
+colors <- c("Main Earner" = pal_1, "Household" = pal_2)
 ggplot(df_Fig_3_indHH) +
     geom_line(aes(x = year, y = Var_earnings_max, colour = "Main Earner"), linewidth = 1) +
     geom_line(aes(x = year, y = Var_earnings_HH, colour = "Household"), linewidth = 1) +
@@ -73,7 +74,7 @@ df_Fig_3_indHH_raw <- df_floor %>% group_by(year) %>%
               Var_earnings_HH = weighted.var(log(inc_earnings, exp(1)), weight, na.rm = T),
               Gini_earnings_max = Gini(inc_earnings_max_raw, weight, na.rm = T),
               Gini_earnings_HH = Gini(inc_earnings, weight, na.rm = T))
-colors <- c("Main Earner" = "blue", "Household" = "red")
+colors <- c("Main Earner" = pal_1, "Household" = pal_2)
 ggplot(df_Fig_3_indHH_raw) +
     geom_line(aes(x = year, y = Var_earnings_max, colour = "Main Earner"), linewidth = 1) +
     geom_line(aes(x = year, y = Var_earnings_HH, colour = "Household"), linewidth = 1) +
@@ -106,7 +107,7 @@ ggplot(df_Fig_3_indHH_raw) +
 ggsave("figures/Fig_3/Fig_3h_Gini_indHH_raw.png", dpi = 600, width = 5, height = 3)
 
 # single/married
-colors <- c("0" = "blue", "1" = "red")
+colors <- c("0" = pal_1, "1" = pal_2)
 df_Fig_3_single <- df_floor %>% group_by(year, marriage) %>% 
     summarise(Var_earnings = weighted.var(log(inc_earnings, exp(1)), weight, na.rm = T)) %>%
     filter(!is.na(marriage))
@@ -132,14 +133,14 @@ df_Fig_3_single <- df_floor %>% filter(year >= 1988) %>%
     summarise(married_ratio = sum(marriage == 1, na.rm = T) / sum(!is.na(marriage)),
               two_earner_ratio = sum(!is.na(inc_earnings_spouse_raw) & !is.na(inc_earnings_main_raw)) / sum(!is.na(spouse_id)))
 ggplot(df_Fig_3_single, aes(x = year)) +
-    geom_line(aes(y = married_ratio), colour = "blue", linewidth = 1) +
+    geom_line(aes(y = married_ratio), colour = pal_1, linewidth = 1) +
     scale_x_continuous(name = "Year") +
     scale_y_continuous(name = "Ratio") +
     labs(title = "Fraction of Married Households \n Among All Households") +
     theme(plot.title = element_text(hjust = 0.5))
 ggsave("figures/Fig_3/Fig_3d_married_ratio.png", dpi = 600, width = 5, height = 3)
 ggplot(df_Fig_3_single, aes(x = year)) +
-    geom_line(aes(y = two_earner_ratio), colour = "blue", linewidth = 1) +
+    geom_line(aes(y = two_earner_ratio), colour = pal_1, linewidth = 1) +
     scale_x_continuous(name = "Year") +
     scale_y_continuous(name = "Ratio") +
     labs(title = "Fraction of Two-Earner Households \n Among Cohabiting Couples") +
@@ -152,7 +153,7 @@ df_Fig_3_correlation <- df_floor %>% filter(year >= 1988, !is.na(inc_earnings_sp
     group_by(year) %>%
     summarise(correlation = cor(log(inc_earnings_main_raw, exp(1)), log(inc_earnings_spouse_raw, exp(1)), use = "pairwise.complete.obs"))
 ggplot(df_Fig_3_correlation, aes(x = year, y = correlation)) +
-    geom_line(colour = "blue", linewidth = 1) +
+    geom_line(colour = pal_1, linewidth = 1) +
     scale_x_continuous(name = "Year") +
     scale_y_continuous(name = "Correlation") +
     labs(title = "Between-Spouse Corr. of Log Earnings \n Among Two-Earner Cohabiting Couples") +
@@ -160,7 +161,8 @@ ggplot(df_Fig_3_correlation, aes(x = year, y = correlation)) +
 ggsave("figures/Fig_3/Fig_3f_correlation.png", dpi = 600, width = 5, height = 3)
 
 # Fig6 Private transfers and asset income
-colors <- c("HH Earnings" = "blue", "HH Earnings + Priv. Transf." = "red", "HH Earnings + Asset Income" = "green", "HH Earnings + Priv. Transf. + Asset Income" = "purple")
+# The baseline is black and the three sums take the series colors in order.
+colors <- c("HH Earnings" = pal_ink, "HH Earnings + Priv. Transf." = pal_1, "HH Earnings + Asset Income" = pal_2, "HH Earnings + Priv. Transf. + Asset Income" = pal_3)
 # Each line is its own series with its own floor. The sums are formed from the
 # unfloored components, so a household with no earnings but some asset income
 # is in the asset-income line, and each sum is then floored on its own median.
@@ -225,7 +227,7 @@ print(df_Fig_4_correlation, n=100)
 # households with either a private transfer or asset income
 ggplot(df_Fig_4_correlation, aes(x = year, y = correlation)) +
     geom_hline(yintercept = 0, colour = "grey40") +
-    geom_line(colour = "blue", linewidth = 1) +
+    geom_line(colour = pal_1, linewidth = 1) +
     scale_x_continuous(name = "Year") +
     scale_y_continuous(name = "Correlation") +
     labs(title = "Correlation of Private Transfers and Asset Income") +
@@ -253,7 +255,7 @@ ggsave("figures/Fig_4/Fig_4d_Gini_inc.png", dpi = 600, width = 4, height = 4)
 # Fig5 Government benefits and tax
 # top: Pre-Govt. Income, + Govt. Benefits
 # bottom: Pre-Tax Income, Disposable Income
-colors <- c("Pre-Govt. Income" = "blue", "Pre-Tax Income" = "red", "Disposable Income" = "green")
+colors <- c("Pre-Govt. Income" = pal_1, "Pre-Tax Income" = pal_2, "Disposable Income" = pal_3)
 # fill 0 for NA inc_gtransfer, inc_total, exp_tax
 df_all <- df_all %>% mutate(across(c(inc_gtransfer, inc_total, exp_tax), ~ ifelse(is.na(.), 0, .)))
 df_all <- df_all %>% mutate(Pre_Govt = inc_total - inc_gtransfer,

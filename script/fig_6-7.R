@@ -6,6 +6,7 @@
 library(tidyverse)
 library(DescTools)
 library(modi)
+source("script//plot_style.R")
 
 # read the cross sectional all file
 df_all <- read.csv("HH_inc_exp//HH_all.csv") %>% as_tibble()
@@ -40,7 +41,7 @@ df_Fig_6 <- df_all %>% group_by(year) %>%
               P50_P10_consump = weighted.quantile(exp_consumption, weight, prob = 0.5) / weighted.quantile(exp_consumption, weight, prob = 0.1),
               P90_P50_consump = weighted.quantile(exp_consumption, weight, prob = 0.9) / weighted.quantile(exp_consumption, weight, prob = 0.5))
 # plot
-colors <- c("disp_inc" = "blue", "consump" = "red")
+colors <- c("disp_inc" = pal_1, "consump" = pal_2)
 ggplot(df_Fig_6) +
     geom_line(aes(x = year, y = Var_disp_inc, color = "disp_inc"), linewidth = 1) +
     geom_line(aes(x = year, y = Var_consump, color = "consump"), linewidth = 1) +
@@ -121,8 +122,7 @@ df_Fig_7 <- df_Fig_7 %>%
            n_log_P90 = log_P90 - base_1981$log_P90,
            n_log_P95 = log_P95 - base_1981$log_P95)
 # plot
-colors <- c("P5" = "blue", "P10" = "green", "P25" = "red", "P50" = "cyan", 
-            "P75" = "purple", "P90" = "yellow", "P95" = "black")
+colors <- pal_pct
 ggplot(df_Fig_7) +
     geom_line(aes(x = year, y = n_log_P5, colour = "P5"), linewidth = 1) +
     geom_line(aes(x = year, y = n_log_P10, colour = "P10"), linewidth = 1) +
@@ -209,22 +209,22 @@ df_Fig_8 <- df_all %>% group_by(year) %>%
               Gini_housing = Gini(exp_housing, weight, na.rm = T))
 # plot
 ggplot(df_Fig_8, aes(x = year, y = Var_food)) +
-    geom_line(colour = "blue", linewidth = 1) +
+    geom_line(colour = pal_1, linewidth = 1) +
     labs(title = "Equiv. HH Food Consumption", x = "Year", y = "Variance of Log") +
     theme(plot.title = element_text(hjust = 0.5))
 ggsave("figures/Fig_8/Fig_8a_Var_Food.png", dpi = 600, width = 4, height = 4)
 ggplot(df_Fig_8, aes(x = year, y = Gini_food)) +
-    geom_line(colour = "blue", linewidth = 1) +
+    geom_line(colour = pal_1, linewidth = 1) +
     labs(title = "Equiv. HH Food Consumption", x = "Year", y = "Gini Coefficient") +
     theme(plot.title = element_text(hjust = 0.5))
 ggsave("figures/Fig_8/Fig_8b_Gini_Food.png", dpi = 600, width = 4, height = 4)
 ggplot(df_Fig_8, aes(x = year, y = Var_housing)) +
-    geom_line(colour = "blue", linewidth = 1) +
+    geom_line(colour = pal_1, linewidth = 1) +
     labs(title = "Equiv. HH Housing Services", x = "Year", y = "Variance of Log") +
     theme(plot.title = element_text(hjust = 0.5))
 ggsave("figures/Fig_8/Fig_8c_Var_Housing.png", dpi = 600, width = 4, height = 4)
 ggplot(df_Fig_8, aes(x = year, y = Gini_housing)) +
-    geom_line(colour = "blue", linewidth = 1) +
+    geom_line(colour = pal_1, linewidth = 1) +
     labs(title = "Equiv. HH Housing Services", x = "Year", y = "Gini Coefficient") +
     theme(plot.title = element_text(hjust = 0.5))
 ggsave("figures/Fig_8/Fig_8d_Gini_Housing.png", dpi = 600, width = 4, height = 4)
