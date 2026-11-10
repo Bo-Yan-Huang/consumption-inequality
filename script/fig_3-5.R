@@ -27,6 +27,10 @@ df_floor <- df_all %>% group_by(year) %>%
                     inc_earnings_main_raw, inc_earnings_spouse_raw), ~ floor_na(.x, weight))) %>%
     ungroup()
 
+# Pearson correlation with the survey weights, so the correlations describe
+# the population like the weighted variances and Gini coefficients do.
+weighted_cor <- function(x, y, w) cov.wt(cbind(x, y), wt = w, cor = TRUE)$cor[1, 2]
+
 # Fig 5 From individual to HH inequality
 df_Fig_3_indHH <- df_floor %>% group_by(year) %>% 
     summarise(Var_earnings_max = weighted.var(log(inc_earnings_max, exp(1)), weight, na.rm = T),
@@ -127,11 +131,12 @@ ggplot(df_Fig_3_single, aes(x = year, y = Var_earnings, colour = factor(marriage
 ggsave("figures/Fig_3/Fig_3c_Var_single.png", dpi = 600, width = 5, height = 3)
 # Household structure (3d-3f) describes all households. A head or spouse
 # counts as an earner when their own earnings clear the floor for their
-# series, the same rule as every other earnings statistic.
-df_Fig_3_single <- df_floor %>% filter(year >= 1988) %>% 
+# series, the same rule as every other earnings statistic. Both shares are
+# shares of the survey weight, not of the households sampled.
+df_Fig_3_single <- df_floor %>% filter(year >= 1988) %>%
     group_by(year) %>%
-    summarise(married_ratio = sum(marriage == 1, na.rm = T) / sum(!is.na(marriage)),
-              two_earner_ratio = sum(!is.na(inc_earnings_spouse_raw) & !is.na(inc_earnings_main_raw)) / sum(!is.na(spouse_id)))
+    summarise(married_ratio = sum(weight[!is.na(marriage) & marriage == 1]) / sum(weight[!is.na(marriage)]),
+              two_earner_ratio = sum(weight[!is.na(inc_earnings_spouse_raw) & !is.na(inc_earnings_main_raw)]) / sum(weight[!is.na(spouse_id)]))
 ggplot(df_Fig_3_single, aes(x = year)) +
     geom_line(aes(y = married_ratio), colour = pal_1, linewidth = 1) +
     scale_x_continuous(name = "Year") +
@@ -151,7 +156,7 @@ ggsave("figures/Fig_3/Fig_3e_two_earner_ratio.png", dpi = 600, width = 5, height
 # adds a common -log(eqi_w) to both logs, which inflates the correlation.
 df_Fig_3_correlation <- df_floor %>% filter(year >= 1988, !is.na(inc_earnings_spouse_raw), !is.na(inc_earnings_main_raw)) %>%
     group_by(year) %>%
-    summarise(correlation = cor(log(inc_earnings_main_raw, exp(1)), log(inc_earnings_spouse_raw, exp(1)), use = "pairwise.complete.obs"))
+    summarise(correlation = weighted_cor(log(inc_earnings_main_raw, exp(1)), log(inc_earnings_spouse_raw, exp(1)), weight))
 ggplot(df_Fig_3_correlation, aes(x = year, y = correlation)) +
     geom_line(colour = pal_1, linewidth = 1) +
     scale_x_continuous(name = "Year") +
@@ -221,7 +226,7 @@ df_TEMP <- df_all %>% mutate(inc_ptransfer = ifelse(is.na(inc_ptransfer), 0, inc
 df_TEMP <- df_TEMP %>% filter(inc_ptransfer > 0 | inc_investment > 0)
 df_Fig_4_correlation <- df_TEMP %>% 
     group_by(year) %>%
-    summarise(correlation = cor(inc_ptransfer, inc_investment, use = "pairwise.complete.obs"))
+    summarise(correlation = weighted_cor(inc_ptransfer, inc_investment, weight))
 print(df_Fig_4_correlation, n=100)
 # reported in the appendix: Pearson correlation of the two levels among
 # households with either a private transfer or asset income
