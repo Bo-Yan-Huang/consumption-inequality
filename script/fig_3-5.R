@@ -231,7 +231,7 @@ print(df_Fig_4_correlation, n=100)
 # reported in the appendix: Pearson correlation of the two levels among
 # households with either a private transfer or asset income
 ggplot(df_Fig_4_correlation, aes(x = year, y = correlation)) +
-    geom_hline(yintercept = 0, colour = "grey40") +
+    geom_hline(yintercept = 0, colour = pal_rule) +
     geom_line(colour = pal_1, linewidth = 1) +
     scale_x_continuous(name = "Year") +
     scale_y_continuous(name = "Correlation") +
