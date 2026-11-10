@@ -14,6 +14,7 @@ pal_1 <- "#0072B2"    # blue; also every single-line figure
 pal_2 <- "#D55E00"    # vermillion
 pal_3 <- "#009E73"    # bluish green
 pal_ink <- "#000000"  # black, for a baseline the other lines are compared with
+pal_rule <- "grey40"  # grey, for a guide such as a zero line, which is not a series
 
 # Percentiles: seven distinct colors, ordered so that neighboring percentiles
 # differ as much as possible, with the median in black.
