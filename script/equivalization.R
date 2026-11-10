@@ -61,7 +61,11 @@ for(y in years){
                               inc_earnings_main = inc_earnings_main_raw / eqi_w,
                               inc_investment = itm330 / eqi_w,
                               inc_gtransfer = itm430 / eqi_w,
-                              inc_ptransfer = itm410 / eqi_w - inc_gtransfer,
+                              # Private transfers are all transfers less those from the government.
+                              # The survey never records a zero, so a household that receives no
+                              # government transfer has itm430 missing. Count that as zero here, or
+                              # the subtraction returns NA and the private transfers are lost.
+                              inc_ptransfer = itm410 / eqi_w - replace_na(inc_gtransfer, 0),
                               inc_total = itm400 / eqi_w)
     if(y == 84 | y == 83){
         inc_y <- inc_y %>% rowwise() %>% 
