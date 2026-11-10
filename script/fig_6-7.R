@@ -30,16 +30,23 @@ df_all <- df_all %>% group_by(year) %>%
     mutate(across(c(Disposable, exp_consumption, exp_food, exp_housing), ~ floor_na(.x, weight))) %>%
     ungroup()
 
+# weighted.quantile() has no na.rm. It sorts a missing value last and keeps its
+# weight, so the value counts as the largest in the year. Drop it first.
+wquantile <- function(x, w, prob) {
+    keep <- !is.na(x)
+    weighted.quantile(x[keep], w[keep], prob = prob)
+}
+
 # Fig6 Equiv. Disp. Inc. & Equiv. Consumption
 df_Fig_6 <- df_all %>% group_by(year) %>% 
     summarise(Var_disp_inc = weighted.var(log(Disposable, exp(1)), weight, na.rm = T),
               Gini_disp_inc = Gini(Disposable, weight, na.rm = T),
-              P50_P10_disp_inc = weighted.quantile(Disposable, weight, prob = 0.5) / weighted.quantile(Disposable, weight, prob = 0.1),
-              P90_P50_disp_inc = weighted.quantile(Disposable, weight, prob = 0.9) / weighted.quantile(Disposable, weight, prob = 0.5),
+              P50_P10_disp_inc = wquantile(Disposable, weight, prob = 0.5) / wquantile(Disposable, weight, prob = 0.1),
+              P90_P50_disp_inc = wquantile(Disposable, weight, prob = 0.9) / wquantile(Disposable, weight, prob = 0.5),
               Var_consump = weighted.var(log(exp_consumption, exp(1)), weight, na.rm = T),
               Gini_consump = Gini(exp_consumption, weight, na.rm = T),
-              P50_P10_consump = weighted.quantile(exp_consumption, weight, prob = 0.5) / weighted.quantile(exp_consumption, weight, prob = 0.1),
-              P90_P50_consump = weighted.quantile(exp_consumption, weight, prob = 0.9) / weighted.quantile(exp_consumption, weight, prob = 0.5))
+              P50_P10_consump = wquantile(exp_consumption, weight, prob = 0.5) / wquantile(exp_consumption, weight, prob = 0.1),
+              P90_P50_consump = wquantile(exp_consumption, weight, prob = 0.9) / wquantile(exp_consumption, weight, prob = 0.5))
 # plot
 colors <- c("disp_inc" = pal_1, "consump" = pal_2)
 ggplot(df_Fig_6) +
@@ -97,13 +104,13 @@ ggsave("figures/Fig_6/Fig_6d.png", dpi = 600, width = 4, height = 4)
 
 # Fig7 Percentiles of the household consumption distribution 1981
 df_Fig_7 <- df_all %>% group_by(year) %>% 
-    summarise(P5 = weighted.quantile(exp_consumption, weight, prob = 0.05),
-              P10 = weighted.quantile(exp_consumption, weight, prob = 0.1),
-              P25 = weighted.quantile(exp_consumption, weight, prob = 0.25),
-              P50 = weighted.quantile(exp_consumption, weight, prob = 0.50),
-              P75 = weighted.quantile(exp_consumption, weight, prob = 0.75),
-              P90 = weighted.quantile(exp_consumption, weight, prob = 0.9),
-              P95 = weighted.quantile(exp_consumption, weight, prob = 0.95))
+    summarise(P5 = wquantile(exp_consumption, weight, prob = 0.05),
+              P10 = wquantile(exp_consumption, weight, prob = 0.1),
+              P25 = wquantile(exp_consumption, weight, prob = 0.25),
+              P50 = wquantile(exp_consumption, weight, prob = 0.50),
+              P75 = wquantile(exp_consumption, weight, prob = 0.75),
+              P90 = wquantile(exp_consumption, weight, prob = 0.9),
+              P95 = wquantile(exp_consumption, weight, prob = 0.95))
 df_Fig_7 <- df_Fig_7 %>%
     mutate(log_P5 = log(P5, exp(1)),
            log_P10 = log(P10, exp(1)),
